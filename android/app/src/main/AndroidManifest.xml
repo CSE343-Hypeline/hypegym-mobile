@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hypegym.soner.mobile_pages">
+    package="com.example.hypegym">
    <application
-        android:label="mobile_pages"
+        android:label="hypegym"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

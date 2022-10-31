@@ -1,6 +1,6 @@
-# mobile_pages
+# hypegym
 
-The hypegym project for the pages which of login and home.
+A new Flutter project.
 
 ## Getting Started
 
