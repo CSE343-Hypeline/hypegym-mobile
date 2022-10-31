@@ -32,7 +32,7 @@ class _LoginPageState extends State<LoginPage> {
       body: Stack(
         children: [
           Image(
-            image: const AssetImage('images/gym_2.jpg'),
+            image: const AssetImage('images/image_2.jpg'),
             fit: BoxFit.cover,
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                       Text(
-                        'HYPEGYM TEST',
+                        'HYPEGYM',
                         style: TextStyle(
                           fontSize: 50.0,
                           fontWeight: FontWeight.bold,
