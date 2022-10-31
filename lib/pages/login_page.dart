@@ -57,7 +57,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                       Text(
-                        'HYPEGYM',
+                        'HYPEGYM TEST',
                         style: TextStyle(
                           fontSize: 50.0,
                           fontWeight: FontWeight.bold,
