@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/pages/admin_default_page.dart';
 //import 'dart:ui';
 
 class LoginPage extends StatefulWidget {
@@ -13,6 +14,8 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   bool _isWhite = true;
   bool _obscureText = true;
+  late String username;
+  late String password;
 
   // Toggles the password show status
   void _toggle() {
@@ -112,6 +115,12 @@ class _LoginPageState extends State<LoginPage> {
                         icon: const Icon(Icons.clear),
                       ),
                     ),
+                    onChanged: (text) {
+                      setState(() {
+                        username = text;
+                        debugPrint("username: $username");
+                      });
+                    },
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -159,6 +168,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                       ),
                     ),
+                    onChanged: (text) {
+                      setState(() {
+                        password = text;
+                        debugPrint("password: $password");
+                      });
+                    },
                   ),
                 ),
                 GestureDetector(
@@ -184,7 +199,11 @@ class _LoginPageState extends State<LoginPage> {
                         ButtonTheme(
                           minWidth: 150,
                           child: MaterialButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              if(username == "admin" && password == "1234") {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminDefault()));
+                              }
+                            },
                             color: Colors.greenAccent[100],
                             child: const Text(
                               'Log In',
