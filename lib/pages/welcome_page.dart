@@ -55,7 +55,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 child: Padding(
                   padding: EdgeInsets.only(right: 30.0),
                   child: Text(
-                    "GET STRONGER",
+                    "(T)GET STRONGER",
                     style: TextStyle(
                       backgroundColor: Colors.black,
                       fontSize: 25,
