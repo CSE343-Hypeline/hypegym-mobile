@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/about_us_page.dart';
-import 'package:hypegym/pages/login_page.dart';
+import 'package:hypegym/pages/about_us_page.dart'; // admin page aciliyo silme
+import 'package:hypegym/pages/admin_gym_page.dart';
+//import 'package:hypegym/pages/login_page.dart'; //login page icin bu
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -33,67 +34,71 @@ class _WelcomePageState extends State<WelcomePage> {
             ),
           ),
           Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 30.0, right: 30.0),
-                  child: Text(
-                    "HYPEGYM",
-                    style: TextStyle(
-                        backgroundColor: Colors.black,
-                        fontSize: 50,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.greenAccent.shade400
+              Padding(
+                padding: const EdgeInsets.only(top: 30.0, right: 30.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text(
+                      "HYPEGYM",
+                      style: TextStyle(
+                          backgroundColor: Colors.black,
+                          fontSize: 50,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.greenAccent.shade400
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-              const Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(right: 30.0),
-                  child: Text(
-                    "(T)GET STRONGER",
-                    style: TextStyle(
-                      backgroundColor: Colors.black,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(right: 30.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: const [
+                    Text(
+                      "GET STRONGER",
+                      style: TextStyle(
+                        backgroundColor: Colors.black,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
               const Spacer(),
-              const Align(
-                alignment: Alignment.centerLeft,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 30.0),
-                  child: Text(
-                    "WELCOME",
-                    style: TextStyle(
-                      backgroundColor: Colors.black,
-                      fontSize: 35,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+              Padding(
+                padding: const EdgeInsets.only(left: 30.0),
+                child: Row(
+                  children: const [
+                    Text(
+                      "WELCOME",
+                      style: TextStyle(
+                        backgroundColor: Colors.black,
+                        fontSize: 35,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
-              Container(
-                height: 80,
-                width: double.infinity,
-                padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 child: ElevatedButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.greenAccent.shade400,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)
                     ),
+                    minimumSize: const Size(350, 50),
+                    maximumSize: const Size(350, 50),
                   ),
                   child: const Text(
                     "LOGIN",
@@ -105,10 +110,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   ),
                 ),
               ),
-              Container(
-                height: 80,
-                width: double.infinity,
-                padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
+              Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 child: ElevatedButton(
                   onPressed: (){
                     Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutUsPage()));
@@ -119,6 +122,8 @@ class _WelcomePageState extends State<WelcomePage> {
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25)
                     ),
+                    minimumSize: const Size(350, 50),
+                    maximumSize: const Size(350, 50),
                   ),
                   child: Text(
                     "ABOUT US",
