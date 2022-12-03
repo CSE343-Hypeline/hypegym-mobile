@@ -18,18 +18,6 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
               color: Colors.grey.shade900,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white, size: 35.0,),
-                  onPressed: () => Navigator.of(context).pop(),
-                ),
-              ],
-            ),
-          ),
           ListView(
             physics: const BouncingScrollPhysics(),
             children: [
@@ -145,21 +133,27 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      textStyle: const TextStyle(
-                        fontSize: 20,
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      TextButton(
+                        style: TextButton.styleFrom(
+                          textStyle: const TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
+                        onPressed: () {},
+                        child: const Text(
+                          'Remove this trainer',
+                          style: TextStyle(
+                            color: Colors.white,
+                            decoration: TextDecoration.underline,
+                            decorationStyle: TextDecorationStyle.dashed,
+                          ),
+                        ),
                       ),
-                    ),
-                    onPressed: () {},
-                    child: const Text(
-                      'Remove this trainer.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        decoration: TextDecoration.underline,
-                        decorationStyle: TextDecorationStyle.dashed,
-                      ),
-                    ),
+                      const Icon(Icons.delete, size: 20.0, color: Colors.red),
+                    ],
                   ),
                 ],
               ),
