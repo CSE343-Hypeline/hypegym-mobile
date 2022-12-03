@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/admin_default_page.dart';
-//import 'dart:ui';
+import 'package:hypegym/pages/admin_gym_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -201,7 +200,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: MaterialButton(
                             onPressed: () {
                               if(username == "admin" && password == "1234") {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminDefault()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
                               }
                             },
                             color: Colors.greenAccent[100],
