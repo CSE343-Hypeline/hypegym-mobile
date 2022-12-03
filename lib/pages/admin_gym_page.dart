@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/pages/admin_gym_information_page.dart';
 import 'package:hypegym/pages/admin_member_page.dart';
 import 'package:hypegym/pages/admin_profile_page.dart';
 //import 'package:hypegym_yedek_1/pages/member_list.dart';
@@ -17,10 +18,7 @@ class _AdminGymPageState extends State<AdminGymPage> {
   TextStyle(fontSize: 30, fontWeight: FontWeight.bold, backgroundColor: Colors.white);
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Text(
-      'Gym bilgileri olcak',
-      style: optionStyle,
-    ),
+    AdminGymInformationPage(),
     Text(
       'Trainer bilgileri olcak',
       style: optionStyle,
