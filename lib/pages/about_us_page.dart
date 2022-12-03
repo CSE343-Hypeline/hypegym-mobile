@@ -47,10 +47,10 @@ class AboutUsPage extends StatelessWidget {
                     Text(
                       "ABOUT US",
                       style: TextStyle(
-                          backgroundColor: Colors.black.withOpacity(0.5),
-                          fontSize: 50,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.greenAccent.shade400
+                        backgroundColor: Colors.black.withOpacity(0.5),
+                        fontSize: 50,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.greenAccent.shade400,
                       ),
                     ),
                   ],
@@ -61,35 +61,57 @@ class AboutUsPage extends StatelessWidget {
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16.0),
-                    color: Colors.grey.shade300.withOpacity(0.6),
+                    color: Colors.grey.shade900.withOpacity(0.8),
                   ),
                   child: Column(
-                    children: const [
+                    children: [
                       Padding(
-                        padding: EdgeInsets.all(30.0),
+                        padding: const EdgeInsets.all(30.0),
                         child: Text(
                           "REACH YOUR LIMITS AND GET TO THE NEXT LEVEL",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.greenAccent.shade400,
                           ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(top: 0.0, bottom: 30.0, left: 10.0, right: 10.0),
                         child: Text(
-                          "     Hypegym is a gym management system enterprice that can "
-                              "be used simultaneously by gym owners, personal trainers "
-                              "and members. Thanks to the QR code, the Hypegym system "
-                              "removes the obligation to use a card when entering gyms. "
-                              "Furthermore, Hypegym simplifies member management and "
-                              "assigning exercise programs.",
+                          "Hypegym is a gym management system enterprice that can be used simultaneously "
+                              "by gym owners, personal trainers and members.",
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Colors.white,
                           ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 0.0, bottom: 30.0, left: 10.0, right: 10.0),
+                        child: Text(
+                          "Thanks to the QR code, the Hypegym system removes the obligation to use a card when entering gyms.",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 0.0, bottom: 30.0, left: 10.0, right: 10.0),
+                        child: Text(
+                          "Furthermore, Hypegym simplifies member management and assigning exercise programs.",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
+                          textAlign: TextAlign.center,
                         ),
                       ),
                     ],
