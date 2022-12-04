@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/pages/admin_trainer_profile_page.dart';
+import 'package:hypegym/pages/user_add_page.dart';
 
 class AdminTrainerPage extends StatefulWidget {
   const AdminTrainerPage({Key? key}) : super(key: key);
@@ -71,7 +72,7 @@ class _AdminTrainerPageState extends State<AdminTrainerPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const UserAddPage()));
         },
         backgroundColor: Colors.greenAccent.shade400,
         foregroundColor: Colors.black,
