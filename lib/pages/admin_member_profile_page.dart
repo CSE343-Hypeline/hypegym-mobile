@@ -143,7 +143,23 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                             fontSize: 20.0,
                           ),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          final snackBar = SnackBar(
+                            content: const Text(
+                              "Attention!!  You are deleting this user.",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            action: SnackBarAction(
+                              label: 'DELETE',
+                              onPressed: (){
+                                //burda backend den kullaniciyi silcez
+                              },
+                            ),
+                          );
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        },
                         child: const Text(
                           'Remove this member',
                           style: TextStyle(
