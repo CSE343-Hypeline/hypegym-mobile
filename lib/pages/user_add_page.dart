@@ -14,6 +14,7 @@ class _UserAddPageState extends State<UserAddPage> {
   late String name;
   late String email;
   late String phone;
+  late String password;
 
   @override
   Widget build(BuildContext context) {
@@ -66,7 +67,6 @@ class _UserAddPageState extends State<UserAddPage> {
                           onFieldSubmitted: (value) {
                             setState(() {
                               name = value;
-                              // firstNameList.add(firstName);
                             });
                           },
                           validator: (value) {
@@ -97,7 +97,6 @@ class _UserAddPageState extends State<UserAddPage> {
                           onFieldSubmitted: (value) {
                             setState(() {
                               email = value;
-                              // lastNameList.add(lastName);
                             });
                           },
                         ),
@@ -118,12 +117,36 @@ class _UserAddPageState extends State<UserAddPage> {
                           onFieldSubmitted: (value) {
                             setState(() {
                               name = value;
-                              // firstNameList.add(firstName);
                             });
                           },
                           validator: (value) {
                             if (value == null || value.isEmpty || value.length < 10) {
                               return 'Phone Number must contain at least 10 characters';
+                            }
+                          },
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Password',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                borderSide:
+                                BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: OutlineInputBorder()),
+                          onFieldSubmitted: (value) {
+                            setState(() {
+                              password = value;
+                            });
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Password must contain a value';
                             }
                           },
                         ),
