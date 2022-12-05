@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/about_us_page.dart'; // admin page aciliyo silme
-import 'package:hypegym/pages/admin_gym_page.dart';
-//import 'package:hypegym/pages/login_page.dart'; //login page icin bu
+import 'package:hypegym/pages/about_us_page.dart';
+import 'package:hypegym/pages/login_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);
@@ -90,7 +89,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 child: ElevatedButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.greenAccent.shade400,
