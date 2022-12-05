@@ -62,6 +62,27 @@ class ApiService {
     return null;
   }
 
+  Future<Response?> deleteUser(int user_id) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      print(token.toString());
+      Response response = await delete(
+        Uri.parse('${Constants.baseUrl}/api/user/$user_id'),
+        headers: requestHeaders,
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
+  }
+
 /*
   Future<Response> getMyProfile() async {
     var myProfileUri = Uri.parse('${Constants.baseUrl}/auth/user/me');

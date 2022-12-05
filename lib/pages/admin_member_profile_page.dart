@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/pages/admin_gym_page.dart';
+import 'package:hypegym/services/api_service.dart';
 
 class AdminMemberProfilePage extends StatefulWidget {
   const AdminMemberProfilePage({Key? key}) : super(key: key);
@@ -8,6 +10,9 @@ class AdminMemberProfilePage extends StatefulWidget {
 }
 
 class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
+
+  final ApiService apiService = ApiService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -153,8 +158,18 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                             ),
                             action: SnackBarAction(
                               label: 'DELETE',
-                              onPressed: (){
-                                //burda backend den kullaniciyi silcez
+                              onPressed: () async {
+                                var res = await apiService.deleteUser(5);
+                                switch (res!.statusCode) {
+                                  case 200:
+                                    print('deleted member');
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                                    break;
+                                  default:
+                                    print('member not delete');
+                                    Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                                    break;
+                                }
                               },
                             ),
                           );
