@@ -185,7 +185,7 @@ class _LoginPageState extends State<LoginPage> {
                             switch (resMe!.statusCode) {
                               case 200:
                                 final User user = User.fromJson(jsonDecode(resMe.body));
-                                if(user.roles == "SUPERADMIN"){
+                                if(user.role == "SUPERADMIN"){
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
                                 }
                                 break;
