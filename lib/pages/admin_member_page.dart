@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/models/user.dart';
 import 'package:hypegym/pages/admin_member_profile_page.dart';
 import 'package:hypegym/pages/user_add_page.dart';
+import 'package:hypegym/services/api_service.dart';
 
 class AdminMemberPage extends StatefulWidget {
   const AdminMemberPage({Key? key}) : super(key: key);
@@ -10,9 +12,11 @@ class AdminMemberPage extends StatefulWidget {
 }
 
 class _AdminMemberPageState extends State<AdminMemberPage> {
+  final ApiService apiService = ApiService();
+
   @override
   Widget build(BuildContext context) {
-    final membersList = ['Member 1', 'Member 2', 'Member 3', 'Member 4', 'Member 5', 'Member 6', 'Member 7', 'Member 8', 'Member 9', 'Member 10', 'Member 11', 'Member 12', 'Member 13', 'Member 14', 'Member 15', 'Member 16'];
+    //final trainersList = ['Trainer 1', 'Trainer 2', 'Trainer 3', 'Trainer 4', 'Trainer 5', 'Trainer 6', 'Trainer 7', 'Trainer 8', 'Trainer 9', 'Trainer 10', 'Trainer 11', 'Trainer 12', 'Trainer 13', 'Trainer 14'];
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -36,34 +40,40 @@ class _AdminMemberPageState extends State<AdminMemberPage> {
                 ],
               ),
             ),
-            Expanded(
-              // burda online olma durumunu gore opacity eklencek ve subtitleler ona gore ayarlancak
-              child: ListView.builder(
-                itemCount: membersList.length,
-                itemBuilder: (context, i) {
-                  return Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: ListTile(
-                      //shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-                      leading: const Icon(Icons.account_circle, color: Colors.white,),
-                      trailing: Wrap(
-                        spacing: 12,
-                        children: <Widget>[
-                          Icon(Icons.fitness_center, color: Colors.greenAccent.shade400,),
-                          const Icon(Icons.keyboard_arrow_right, color: Colors.white,),
-                        ],
-                      ),
-                      title: Text(membersList[i]),
-                      subtitle: Text(
-                        "In gym/Outside",
-                        style: TextStyle(
-                          color: Colors.white.withOpacity(0.5),
-                        ),
-                      ),
-                      textColor: Colors.white,
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminMemberProfilePage())), //membersList[i] gelmesi lazim
-                    ),
-                  );
+            Center(
+              child: FutureBuilder<List<UserDto>>(
+                future: apiService.fetchMembers(1),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, index) {
+                        return ListTile(
+                          leading: const Icon(Icons.account_circle, color: Colors.white,),
+                          title: Text(snapshot.data![index].email.toString()),
+                          trailing: Wrap(
+                            spacing: 12,
+                            children: <Widget>[
+                              Icon(Icons.fitness_center, color: Colors.greenAccent.shade400,),
+                              const Icon(Icons.keyboard_arrow_right, color: Colors.white,),
+                            ],
+                          ),
+                          subtitle: Text(
+                            "In gym/Outside",
+                            style: TextStyle(
+                              color: Colors.white.withOpacity(0.5),
+                            ),
+                          ),
+                          textColor: Colors.white,
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminMemberProfilePage())),
+                        );
+                      },
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('${snapshot.error}');
+                  }
+                  return const CircularProgressIndicator();
                 },
               ),
             ),

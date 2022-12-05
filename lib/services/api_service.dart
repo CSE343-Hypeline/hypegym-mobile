@@ -84,7 +84,7 @@ class ApiService {
     return null;
   }
 
-  Future<List<UserDto>> fetchTrainers(int gym_id) async {
+  Future<List<UserDto>> fetchMembers(int gym_id) async {
     String token = await tokenOrEmpty;
     Map<String, String> requestHeaders = {
       'Content-type': 'application/json',
@@ -94,6 +94,28 @@ class ApiService {
 
     final response = await get(
         Uri.parse('${Constants.baseUrl}/api/users/members/$gym_id'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      final List result = json.decode(response.body);
+      return result.map((e) => UserDto.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<List<UserDto>> fetchTrainers(int gym_id) async {
+    String token = await tokenOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/users/pts/$gym_id'),
         headers: requestHeaders
     );
 

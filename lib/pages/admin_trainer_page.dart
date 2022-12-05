@@ -84,6 +84,7 @@ class _AdminTrainerPageState extends State<AdminTrainerPage>{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
+
           Navigator.push(context, MaterialPageRoute(builder: (context) => const UserAddPage()));
         },
         backgroundColor: Colors.greenAccent.shade400,

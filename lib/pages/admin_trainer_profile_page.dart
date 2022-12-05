@@ -158,7 +158,7 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                             action: SnackBarAction(
                               label: 'DELETE',
                               onPressed: () async {
-                                var res = await apiService.deleteUser(5);
+                                var res = await apiService.deleteUser(2);
                                 switch (res!.statusCode) {
                                   case 200:
                                     print('deleted member');
