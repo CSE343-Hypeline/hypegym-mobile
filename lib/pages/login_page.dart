@@ -1,5 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hypegym/models/user.dart';
 import 'package:hypegym/pages/admin_gym_page.dart';
+import 'package:hypegym/services/api_service.dart';
+import 'package:hypegym/services/auth_service.dart';
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -9,24 +16,13 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final _textController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _isWhite = true;
-  bool _obscureText = true;
-  late String username;
-  late String password;
 
-  // Toggles the password show status
-  void _toggle() {
-    setState(() {
-      _obscureText = !_obscureText;
-    });
-  }
-  void _focus() {
-    setState(() {
-      _isWhite = false;
-    });
-  }
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  final AuthService authService = AuthService();
+  final ApiService apiService = ApiService();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final storage = const FlutterSecureStorage();
 
   @override
   Widget build(BuildContext context) {
@@ -40,184 +36,188 @@ class _LoginPageState extends State<LoginPage> {
             width: MediaQuery.of(context).size.width,
           ),
           SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
-                  child: Row(
+            child: Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      IconButton(
-                        icon: const Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                          size: 35.0,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10,),
+                        child: IconButton(
+                          icon: const Icon(
+                            Icons.arrow_back,
+                            color: Colors.white,
+                            size: 35.0,
+                          ),
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
                         ),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
                       ),
-                      Text(
-                        'HYPEGYM',
-                        style: TextStyle(
-                          fontSize: 50.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.greenAccent[100],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 50.0, right: 10.0),
+                        child: Text(
+                          'HYPEGYM',
+                          style: TextStyle(
+                            backgroundColor: Colors.black,
+                            fontSize: 50,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.greenAccent.shade400,
+                          ),
                         ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.5,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: TextField(
-                    onTap: _focus,
-                    controller: _textController,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
-                    decoration: InputDecoration(
-                      isDense: true,
-                      filled: true,
-                      fillColor: Colors.black.withOpacity(0.8),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.greenAccent,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.greenAccent,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      labelText: 'Username',
-                      labelStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                      ),
-
-                      hintText: 'Username',
-                      hintStyle: TextStyle(
-                        fontSize: 20.0,
-                        color: _isWhite ? Colors.white : Colors.black,
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          _textController.clear();
-                        },
-                        icon: const Icon(Icons.clear),
-                      ),
-                    ),
-                    onChanged: (text) {
-                      setState(() {
-                        username = text;
-                        debugPrint("username: $username");
-                      });
+                  const SizedBox(height: 320,),
+                  TextFormField(
+                    controller: _emailController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 3) {
+                        return 'First Name must contain at least 3 characters';
+                      }
                     },
-                  ),
-                ),
-                const SizedBox(height: 20),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: TextField(
-                    onTap: _focus,
-                    obscureText: _obscureText,
-                    controller: _passwordController,
-                    style: const TextStyle(
-                      color: Colors.white,
-                    ),
+                    style: const TextStyle(color: Colors.white),
+                    onChanged: (value) {},
+                    autocorrect: true,
                     decoration: InputDecoration(
-                      isDense: true,
-                      filled: true,
-                      fillColor: Colors.black.withOpacity(0.6),
+                      errorStyle: const TextStyle(color: Colors.red),
+                      fillColor: Colors.black54,
                       enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.greenAccent,
-                        ),
-                        borderRadius: BorderRadius.circular(10.0),
+                        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(
+                            color: Colors.greenAccent.shade400, width: 1),
                       ),
                       focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                          color: Colors.greenAccent,
+                        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                        borderSide: BorderSide(
+                            color: Colors.greenAccent.shade400, width: 1),
+                      ),
+                      labelText: 'Email',
+                      hintText: 'Email',
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                        child: Icon(
+                          Icons.email,
+                          color: Colors.greenAccent.shade400,
+                          size: 24,
                         ),
-                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      labelStyle: TextStyle(
+                        height: 1.171875,
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.greenAccent.shade400,
+                      ),
+                      hintStyle: TextStyle(
+                        height: 1.171875,
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.greenAccent.shade400,
+                      ),
+                      filled: true,
+                    ),
+                  ),
+                  const SizedBox(height: 20,),
+                  TextFormField(
+                    controller: _passwordController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty || value.length < 3) {
+                        return 'First Name must contain at least 3 characters';
+                      }
+                    },
+                    style: const TextStyle(color: Colors.white),
+                    onChanged: (value) {},
+                    autocorrect: true,
+                    obscureText: true,
+                    keyboardType: TextInputType.emailAddress,
+                    decoration: InputDecoration(
+                      errorStyle: const TextStyle(color: Colors.red),
+                      fillColor: Colors.black54,
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                        borderSide: BorderSide(
+                            color: Colors.greenAccent.shade400, width: 1),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                        borderSide: BorderSide(
+                            color: Colors.greenAccent.shade400, width: 1),
                       ),
                       labelText: 'Password',
-                      labelStyle: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 22,
-                      ),
                       hintText: 'Password',
+                      prefixIcon: Padding(
+                        padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                        child: Icon(
+                          Icons.password,
+                          color: Colors.greenAccent.shade400,
+                          size: 24,
+                        ),
+                      ),
+                      labelStyle: TextStyle(
+                          height: 1.171875,
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.greenAccent.shade400),
                       hintStyle: TextStyle(
-                        fontSize: 20.0,
-                        color: _isWhite ? Colors.white : Colors.black,
-                      ),
-                      suffixIcon: IconButton(
-                        onPressed: _toggle,
-                        icon: Icon(
-                          _obscureText
-                              ? Icons.visibility_rounded
-                              : Icons.visibility_off_rounded,
-                        ),
-                      ),
+                          height: 1.171875,
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.greenAccent.shade400),
+                      filled: true,
                     ),
-                    onChanged: (text) {
-                      setState(() {
-                        password = text;
-                        debugPrint("password: $password");
-                      });
+                  ),
+                  const SizedBox(height: 30,),
+                  ElevatedButton(
+                    onPressed: () async {
+                      //login(_emailController.text.toString(), _passwordController.text.toString());
+                      if (_formKey.currentState!.validate()) {
+                        var res = await authService.login(_emailController.text, _passwordController.text);
+                        //print(res?.headers);
+                        switch (res!.statusCode) {
+                          case 200:
+                            var data = jsonDecode(res.body);
+                            storage.write(key: "token", value: data['token']);
+                            //if (!mounted) return;
+                            var resMe = await apiService.getMyProfile();
+                            switch (resMe!.statusCode) {
+                              case 200:
+                                final User user = User.fromJson(jsonDecode(resMe.body));
+                                if(user.roles == "SUPERADMIN"){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                                }
+                                break;
+                              case 401:
+                                break;
+                              default:
+                                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                  content: Text("You are not in the gym!"),
+                                ));
+                                break;
+                            }
+                            break;
+                          default:
+                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                              content: Text("Wrong email or password!"),
+                            ));
+                            break;
+                        }
+                      }
                     },
-                  ),
-                ),
-                GestureDetector(
-                  behavior: HitTestBehavior.opaque,
-                  onTap: () {
-                    debugPrint('Forgot Password?');
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          'Forgot Password?',
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18.0,
-                            decoration: TextDecoration.underline,
-                            decorationStyle: TextDecorationStyle.dashed,
-                            decorationThickness: 2.0,
-                          ),
-                        ),
-                        ButtonTheme(
-                          minWidth: 150,
-                          child: MaterialButton(
-                            onPressed: () {
-                              if(username == "admin" && password == "1234") {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
-                              }
-                            },
-                            color: Colors.greenAccent[100],
-                            child: const Text(
-                              'Log In',
-                              style: TextStyle(
-                                fontSize: 20,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.greenAccent.shade400,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)
+                      ),
+                      minimumSize: const Size(200, 50),
+                      maximumSize: const Size(200, 50),
                     ),
+                    child: const Text("Log In"),
                   ),
-                )
-              ],
+                ],
+              ),
             ),
           ),
         ],
