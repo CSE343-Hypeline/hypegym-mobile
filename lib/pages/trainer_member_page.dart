@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/pages/trainer_member_program_page.dart';
 
 class TrainerMemberPage extends StatefulWidget {
   const TrainerMemberPage({Key? key}) : super(key: key);
@@ -76,7 +77,7 @@ showAlertDialog(BuildContext context) {
       "Member's Program",
     ),
     onPressed: () {
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminTrainerProfilePage())),
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainerMemberProgramPage()));
     },
   );
   Widget measurementsButton = TextButton(
