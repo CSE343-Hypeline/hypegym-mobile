@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:hypegym/pages/trainer_member_measurement_edit_page.dart';
+import 'package:hypegym/pages/trainer_member_measurement_edit_page.dart';
 
 class TrainerMemberMeasurementPage extends StatefulWidget {
   const TrainerMemberMeasurementPage({Key? key}) : super(key: key);
@@ -99,7 +99,6 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
           ],
         ),
       ),
-      /*
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => MeasurementEditPage(measurementMap)));
@@ -108,7 +107,6 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
         foregroundColor: Colors.black,
         child: const Icon(Icons.edit),
       ),
-       */
     );
   }
 }

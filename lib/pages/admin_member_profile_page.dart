@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/pages/admin_gym_page.dart';
 import 'package:hypegym/services/api_service.dart';
+import 'package:hypegym/models/user.dart';
 
 class AdminMemberProfilePage extends StatefulWidget {
-  const AdminMemberProfilePage({Key? key}) : super(key: key);
+  const AdminMemberProfilePage(this.user, {super.key});
+  final UserDto user;
 
   @override
   State<AdminMemberProfilePage> createState() => _AdminMemberProfilePageState();
@@ -45,6 +47,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
               const SizedBox(height: 24),
               Column(
                 children: [
+                  /*
                   Text(
                     "Name",
                     style: TextStyle(
@@ -63,6 +66,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 24),
+                  */
                   Text(
                     "Email",
                     style: TextStyle(
@@ -72,15 +76,16 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "erayozkan@gmail.com",
-                    style: TextStyle(
+                  Text(
+                    widget.user.email,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 24),
+                  /*
                   Text(
                     "Phone",
                     style: TextStyle(
@@ -117,6 +122,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 24),
+                  */
                   ElevatedButton(
                     onPressed: (){
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));

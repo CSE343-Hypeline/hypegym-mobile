@@ -16,7 +16,6 @@ class _AdminMemberPageState extends State<AdminMemberPage> {
 
   @override
   Widget build(BuildContext context) {
-    //final trainersList = ['Trainer 1', 'Trainer 2', 'Trainer 3', 'Trainer 4', 'Trainer 5', 'Trainer 6', 'Trainer 7', 'Trainer 8', 'Trainer 9', 'Trainer 10', 'Trainer 11', 'Trainer 12', 'Trainer 13', 'Trainer 14'];
     return Scaffold(
       body: Container(
         decoration: BoxDecoration(
@@ -40,7 +39,7 @@ class _AdminMemberPageState extends State<AdminMemberPage> {
                 ],
               ),
             ),
-            Center(
+            Expanded(
               child: FutureBuilder<List<UserDto>>(
                 future: apiService.fetchMembers(1),
                 builder: (context, snapshot) {
@@ -66,7 +65,7 @@ class _AdminMemberPageState extends State<AdminMemberPage> {
                             ),
                           ),
                           textColor: Colors.white,
-                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminMemberProfilePage())),
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdminMemberProfilePage(snapshot.data![index]))),
                         );
                       },
                     );
