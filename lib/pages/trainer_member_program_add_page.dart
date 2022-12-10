@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/trainer_member_program_edit_page.dart';
 
-class TrainerMemberProgramPage extends StatefulWidget {
-  const TrainerMemberProgramPage({Key? key}) : super(key: key);
-
+class TrainerMemberProgramAddPage extends StatefulWidget {
+  const TrainerMemberProgramAddPage(this.programList, this.memberProgramList, {super.key});
+  final List programList;
+  final List memberProgramList;
   @override
-  State<TrainerMemberProgramPage> createState() => _TrainerMemberProgramPageState();
+  State<TrainerMemberProgramAddPage> createState() => _TrainerMemberProgramAddPageState();
 }
 
-class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
-  final List programList = ['Warn Up', 'Jumping Jack', 'Skipping', 'Squats', 'Arm Raises', 'Incline Push-Ups', 'Push-Ups'];
+class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +36,7 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
             ),
             Expanded(
               child: ListView.builder(
-                  itemCount: programList.length,
+                  itemCount: widget.programList.length,
                   itemBuilder: (context, i) {
                     return Padding(
                       padding: const EdgeInsets.all(5.0),
@@ -51,8 +50,31 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
                           ),
                           child: Image.asset('images/image_1.jpg', fit: BoxFit.cover),
                         ),
-                        //trailing: const Icon(Icons.arrow_circle_right_outlined, color: Colors.white,),
-                        title: Text(programList[i]),
+                        trailing:
+                        ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.grey.shade900,
+                            ),
+                            child: Icon(Icons.add_circle, color: Colors.greenAccent.shade400,),
+                            onPressed: () {
+                              widget.memberProgramList.add(widget.programList[i]);
+                              widget.programList.removeAt(i);
+                              setState(() {
+                                //refresh UI after deleting element from list
+                              });
+                            }
+                        ),
+                            /*
+                          const Icon(Icons.add_circle, color: Colors.white,),
+                          onTap: () {
+                            widget.memberProgramList.add(widget.programList[i]);
+                            widget.programList.removeAt(i);
+                            setState(() {
+                              //refresh UI after deleting element from list
+                            });
+                          },
+                             */
+                        title: Text(widget.programList[i]),
                         subtitle: Text(
                           "xbilmemne kere", //burda hareketin kac kere tekrarlancagi bilgisi gelcek ama bunu interaktif bi sekilde alinmasi lazim
                           style: TextStyle(
@@ -68,14 +90,6 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => TrainerMemberProgramEditPage(programList)));
-        },
-        backgroundColor: Colors.greenAccent.shade400,
-        foregroundColor: Colors.black,
-        child: const Icon(Icons.edit),
       ),
     );
   }
