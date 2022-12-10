@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/trainer_member_measurement_edit_page.dart';
+//import 'package:hypegym/pages/trainer_member_measurement_edit_page.dart';
 
+// I can not do the change body measurement part
 class TrainerMemberMeasurementPage extends StatefulWidget {
   const TrainerMemberMeasurementPage({Key? key}) : super(key: key);
 
@@ -10,7 +11,7 @@ class TrainerMemberMeasurementPage extends StatefulWidget {
 
 class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementPage> {
 
-  Map measurementMap = {'Kilogram': '80kg', 'Height': '165cm', 'Wrist': '20cm', 'Chest': '20cm', 'Waist': '20cm', 'Hip': '20cm', 'Arm': '20cm', 'Forearm': '20cm', 'Leg': '20cm', 'Calf': '20cm', 'Neck': '20cm'};
+  Map<String, String> measurementMap = {'Kilogram': '80kg', 'Height': '165cm', 'Wrist': '20cm', 'Chest': '20cm', 'Waist': '20cm', 'Hip': '20cm', 'Arm': '20cm', 'Forearm': '20cm', 'Leg': '20cm', 'Calf': '20cm', 'Neck': '20cm'};
 
   @override
   Widget build(BuildContext context) {
@@ -99,6 +100,7 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
           ],
         ),
       ),
+      /*
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) => MeasurementEditPage(measurementMap)));
@@ -107,6 +109,7 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
         foregroundColor: Colors.black,
         child: const Icon(Icons.edit),
       ),
+       */
     );
   }
 }

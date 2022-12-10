@@ -8,9 +8,6 @@ class MeasurementEditPage extends StatefulWidget {
 }
 
 class _MeasurementEditPageState extends State<MeasurementEditPage> {
-
- // final _inputController = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,35 +67,24 @@ class _MeasurementEditPageState extends State<MeasurementEditPage> {
                             /*
                             Padding(
                               padding: const EdgeInsets.only(left: 20.0, right: 10.0,),
-                              child: SizedBox(
-                                height: 35.0,
-                                width: 70.0,
-                                child: Card(
-                                  color: Colors.white70,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: TextFormField(
-                                      controller: _inputController,
-                                      validator: (value) {
-                                        if (value == null || value.isEmpty) {
-                                          return 'Input can not be empty';
-                                        }
-                                      },
-                                      style: const TextStyle(color: Colors.black),
-                                      onChanged: (value) {
-                                        widget.memberMeasurement[i] = _inputController.text;
-                                      },
-                                      autocorrect: true,
-                                      decoration: InputDecoration(
-                                        errorStyle: const TextStyle(color: Colors.red),
-                                        fillColor: Colors.black54,
-                                        labelText: widget.memberMeasurement.values.elementAt(i),
-                                        //hintText: 'Email',
-                                        filled: true,
-                                      ),
-                                    ),
-                                  ),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.white70,
                                 ),
+                                child: Text(
+                                  widget.memberMeasurement.values.elementAt(i),
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                onPressed: () {
+                                  showAlertDialog(context, widget.memberMeasurement, i);
+                                  setState(() {
+                                    //refresh UI after deleting element from list
+                                  });
+                                },
                               ),
                             ),
                             */
@@ -115,3 +101,54 @@ class _MeasurementEditPageState extends State<MeasurementEditPage> {
     );
   }
 }
+/*
+showAlertDialog(BuildContext context, Map memberMeasurement, int index) {
+  final inputController = TextEditingController();
+  Widget measurementsButton = TextFormField(
+    controller: inputController,
+    validator: (value) {
+      if (value == null || value.isEmpty) {
+        return 'Input can not be empty!!!';
+      }
+    },
+    onChanged: (value) {
+      memberMeasurement[index] = inputController.text;
+    },
+    autocorrect: true,
+  );
+  Widget elevatedButton = SizedBox(
+    height: 35.0,
+    width: 200.0,
+    child: ElevatedButton(
+      child: const Text(
+        'Update',
+        style: TextStyle(fontSize: 40),
+      ),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    ),
+  );
+  AlertDialog alert = AlertDialog(
+    backgroundColor: Colors.grey.shade900,
+    title: const Text(
+      "User Measurement",
+      style: TextStyle(color: Colors.white),
+    ),
+    content: const Text(
+      "Enter the new measurement",
+      style: TextStyle(color: Colors.white),
+    ),
+    actions: [
+      measurementsButton,
+      elevatedButton,
+    ],
+  );
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
+}
+*/
