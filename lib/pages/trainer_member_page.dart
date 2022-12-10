@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/pages/trainer_member_measurement_page.dart';
 import 'package:hypegym/pages/trainer_member_program_page.dart';
 
 class TrainerMemberPage extends StatefulWidget {
@@ -85,7 +86,7 @@ showAlertDialog(BuildContext context) {
         "Member's Measurement",
     ),
     onPressed: () {
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminTrainerProfilePage())),
+      Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainerMemberMeasurementPage()));
     },
   );
   AlertDialog alert = AlertDialog(
