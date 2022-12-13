@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/pages/about_us_page.dart';
-import 'package:hypegym/pages/member_gym_page.dart';
-//import 'package:hypegym/pages/trainer_gym_page.dart';
+//import 'package:hypegym/pages/member_gym_page.dart';
+import 'package:hypegym/pages/trainer_gym_page.dart';
 //import 'package:hypegym/pages/login_page.dart';
 
 class WelcomePage extends StatefulWidget {
@@ -91,8 +91,8 @@ class _WelcomePageState extends State<WelcomePage> {
                 padding: const EdgeInsets.only(top: 10.0, bottom: 10.0, left: 10.0, right: 10.0),
                 child: ElevatedButton(
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MemberGymPage()));
-                    //Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainerGymPage())); //bunu denedigim icin simdilik bu burda
+                    //Navigator.push(context, MaterialPageRoute(builder: (context) => const MemberGymPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainerGymPage())); //bunu denedigim icin simdilik bu burda
                     //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                   },
                   style: ElevatedButton.styleFrom(

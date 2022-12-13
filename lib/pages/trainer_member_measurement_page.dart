@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/pages/temp_edit.dart';
 //import 'package:hypegym/pages/trainer_member_measurement_edit_page.dart';
 
 // I can not do the change body measurement part
@@ -100,16 +101,14 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
           ],
         ),
       ),
-      /*
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => MeasurementEditPage(measurementMap)));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => TempEdit(measurementMap)));
         },
         backgroundColor: Colors.greenAccent.shade400,
         foregroundColor: Colors.black,
         child: const Icon(Icons.edit),
       ),
-       */
     );
   }
 }
