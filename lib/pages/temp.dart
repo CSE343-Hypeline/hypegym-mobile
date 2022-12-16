@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/about_us_page.dart';
-//import 'package:hypegym/pages/admin_gym_page.dart';
-import 'package:hypegym/pages/login_page.dart';
+import 'package:hypegym/pages/temp_edit.dart';
 
 class TempPage extends StatefulWidget {
   const TempPage({Key? key}) : super(key: key);
@@ -11,144 +9,59 @@ class TempPage extends StatefulWidget {
 }
 
 class _TempPageState extends State<TempPage> {
+
+  Map<String, String> measurementMap = {'Kilogram': '80kg', 'Height': '165cm', 'Wrist': '20cm', 'Chest': '20cm', 'Waist': '20cm', 'Hip': '20cm', 'Arm': '20cm', 'Forearm': '20cm', 'Leg': '20cm', 'Calf': '20cm', 'Neck': '20cm'};
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          Container(
-            decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 30.0,
-                  spreadRadius: 5.0,
-                ),
-              ],
-            ),
-            child: Image(
-              image: const AssetImage('images/image_2.jpg'),
-              fit: BoxFit.cover,
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade900,
+        ),
+        child: SingleChildScrollView(
+          child: Column(
             children: [
-              Expanded(
-                flex: 7,
-                child: Column(
+              Padding(
+                padding: const EdgeInsets.only(top: 60.0, bottom: 20.0,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 30.0, right: 30.0),
-                        child: Text(
-                          "HYPEGYM",
-                          style: TextStyle(
-                              backgroundColor: Colors.black,
-                              fontSize: 50,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.greenAccent.shade400
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Align(
-                      alignment: Alignment.centerRight,
-                      child: Padding(
-                        padding: EdgeInsets.only(right: 30.0),
-                        child: Text(
-                          "GET STRONGER",
-                          style: TextStyle(
-                            backgroundColor: Colors.black,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Spacer(),
-                    const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                        padding: EdgeInsets.only(left: 30.0),
-                        child: Text(
-                          "WELCOME",
-                          style: TextStyle(
-                            backgroundColor: Colors.black,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
+                    Text(
+                      "MEASUREMENTS",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.greenAccent.shade400,
                       ),
                     ),
                   ],
                 ),
               ),
-              Expanded(
-                flex: 3,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 80,
-                      width: double.infinity,
-                      padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
-                      child: ElevatedButton(
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.greenAccent.shade400,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25)
-                          ),
-                        ),
-                        child: const Text(
-                          "LOGIN",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 80,
-                      width: double.infinity,
-                      padding: const EdgeInsets.only(top: 25, left: 24, right: 24),
-                      child: ElevatedButton(
-                        onPressed: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const AboutUsPage()));
-                        },
-                        style: ElevatedButton.styleFrom(
-                          //backgroundColor: Colors.greenAccent.shade400,
-                          backgroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(25)
-                          ),
-                        ),
-                        child: Text(
-                          "ABOUT US",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.greenAccent.shade400,
-                            //color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              DataTable(
+                //headingRowColor: MaterialStateProperty.all(Colors.greenAccent.shade400),
+                columns: [
+                  DataColumn(label: Text('Field', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text('Data', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),
+                ],
+                rows: measurementMap.entries
+                    .map((e) => DataRow(cells: [
+                          DataCell(Text(e.key.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                          DataCell(Text(e.value.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                    ]))
+                    .toList(),
               ),
             ],
           ),
-        ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => TempEdit(measurementMap)));
+        },
+        backgroundColor: Colors.greenAccent.shade400,
+        foregroundColor: Colors.black,
+        child: const Icon(Icons.edit),
       ),
     );
   }
