@@ -1,30 +1,3 @@
-import 'package:flutter/material.dart';
-
-class MemberQrPage extends StatefulWidget {
-  const MemberQrPage({Key? key}) : super(key: key);
-
-  @override
-  State<MemberQrPage> createState() => _MemberQrPageState();
-}
-
-class _MemberQrPageState extends State<MemberQrPage> {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: const [
-          Padding(
-            padding: EdgeInsets.only(top:150.0, left: 20.0),
-            child: Text("BURASINI YAPAMADIM DAHA"),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-
-/*
 import 'dart:developer';
 import 'dart:io';
 
@@ -70,8 +43,7 @@ class _MemberQrPageState extends State<MemberQrPage> {
                 children: <Widget>[
                   if (result != null)
                     Text(
-                        'Barcode Type: ${describeEnum(
-                            result!.format)}   Data: ${result!.code}')
+                        'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
                   else
                     const Text('Scan a code'),
                   Row(
@@ -104,8 +76,7 @@ class _MemberQrPageState extends State<MemberQrPage> {
                               builder: (context, snapshot) {
                                 if (snapshot.data != null) {
                                   return Text(
-                                      'Camera facing ${describeEnum(
-                                          snapshot.data!)}');
+                                      'Camera facing ${describeEnum(snapshot.data!)}');
                                 } else {
                                   return const Text('loading');
                                 }
@@ -148,6 +119,7 @@ class _MemberQrPageState extends State<MemberQrPage> {
       ),
     );
   }
+
   Widget _buildQrView(BuildContext context) {
     // For this example we check how width or tall the device is and change the scanArea and overlay accordingly.
     var scanArea = (MediaQuery.of(context).size.width < 400 ||
@@ -195,4 +167,3 @@ class _MemberQrPageState extends State<MemberQrPage> {
     super.dispose();
   }
 }
-*/
