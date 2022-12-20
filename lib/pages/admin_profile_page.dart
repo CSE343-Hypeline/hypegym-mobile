@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hypegym/pages/login_page.dart';
 
 class AdminProfiePage extends StatefulWidget {
   const AdminProfiePage({Key? key}) : super(key: key);
@@ -8,6 +10,9 @@ class AdminProfiePage extends StatefulWidget {
 }
 
 class _AdminProfiePageState extends State<AdminProfiePage> {
+
+  final storage = const FlutterSecureStorage();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,11 +29,18 @@ class _AdminProfiePageState extends State<AdminProfiePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Icon(
-                    Icons.logout,
-                    color: Colors.greenAccent.shade400,
-                    size: 24,
+                  IconButton(
+                      onPressed: () {
+                        storage.delete(key: "token");
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
+                      },
+                      icon: Icon(
+                        Icons.logout,
+                        color: Colors.greenAccent.shade400,
+                        size: 24,
+                      ),
                   ),
+
                 ],
               ),
               Padding(
