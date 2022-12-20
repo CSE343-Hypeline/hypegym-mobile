@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hypegym/models/user.dart';
 import 'package:hypegym/pages/admin_gym_page.dart';
+import 'package:hypegym/pages/trainer_gym_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/services/auth_service.dart';
+
+import 'member_gym_page.dart';
 
 
 class LoginPage extends StatefulWidget {
@@ -187,9 +190,13 @@ class _LoginPageState extends State<LoginPage> {
                                 final User user = User.fromJson(jsonDecode(resMe.body));
                                 if(user.role == "SUPERADMIN"){
                                   Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                                } else if(user.role == "PT"){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainerGymPage()));
+                                } else if(user.role == "MEMBER"){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MemberGymPage()));
                                 }
-                                break;
-                              case 401:
+                                  break;
+                                case 401:
                                 break;
                               default:
                                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

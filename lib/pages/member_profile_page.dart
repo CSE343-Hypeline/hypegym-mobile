@@ -21,6 +21,16 @@ class _MemberProfilePageState extends State<MemberProfilePage> {
           ListView(
             physics: const BouncingScrollPhysics(),
             children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Icon(
+                    Icons.logout,
+                    color: Colors.greenAccent.shade400,
+                    size: 24,
+                  ),
+                ],
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 40.0, bottom: 50.0),
                 child: Row(
