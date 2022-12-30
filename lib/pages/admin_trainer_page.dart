@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/models/user.dart';
 import 'package:hypegym/pages/admin_trainer_profile_page.dart';
-//import 'package:hypegym/pages/admin_trainer_profile_page.dart';
 import 'package:hypegym/pages/user_add_page.dart';
 import 'package:hypegym/services/api_service.dart';
 
@@ -13,7 +12,6 @@ class AdminTrainerPage extends StatefulWidget {
 }
 
 class _AdminTrainerPageState extends State<AdminTrainerPage>{
-
   final ApiService apiService = ApiService();
 
   @override
@@ -67,7 +65,7 @@ class _AdminTrainerPageState extends State<AdminTrainerPage>{
                             ),
                           ),
                           textColor: Colors.white,
-                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminTrainerProfilePage())),
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdminTrainerProfilePage(snapshot.data![index]))),
                         );
                       },
                     );
@@ -83,8 +81,7 @@ class _AdminTrainerPageState extends State<AdminTrainerPage>{
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const UserAddPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const UserAddPage(2)));
         },
         backgroundColor: Colors.greenAccent.shade400,
         foregroundColor: Colors.black,

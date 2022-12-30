@@ -3,7 +3,9 @@ import 'package:hypegym/pages/admin_gym_page.dart';
 import 'package:hypegym/services/api_service.dart';
 
 class UserAddPage extends StatefulWidget {
-  const UserAddPage({Key? key}) : super(key: key);
+  const UserAddPage(this.tempNumber, {super.key});
+
+  final int tempNumber;
 
   @override
   State<UserAddPage> createState() => _UserAddPageState();
@@ -13,8 +15,12 @@ class _UserAddPageState extends State<UserAddPage> {
 
   final GlobalKey<FormState> _formKey = GlobalKey();
   final ApiService apiService = ApiService();
+  final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _phoneNumberController = TextEditingController();
+  final _addressController = TextEditingController();
+  final _gymIDController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +34,6 @@ class _UserAddPageState extends State<UserAddPage> {
           ),
           SingleChildScrollView(
             child: Column(
-              //crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Align(
@@ -45,16 +50,21 @@ class _UserAddPageState extends State<UserAddPage> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 40,),
                 Form(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      /*
-                      Padding(
-                        padding: const EdgeInsets.all(20.0),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/9,
+                        width: MediaQuery.of(context).size.width/1.5,
                         child: TextFormField(
+                          controller: _nameController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Name must contain a value';
+                            }
+                          },
                           decoration: const InputDecoration(
                               filled: true,
                               fillColor: Colors.white,
@@ -65,20 +75,11 @@ class _UserAddPageState extends State<UserAddPage> {
                                 BorderSide(color: Colors.grey, width: 0.0),
                               ),
                               border: OutlineInputBorder()),
-                          onFieldSubmitted: (value) {
-                            setState(() {
-                              name = value;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty || value.length < 3) {
-                              return 'First Name must contain at least 3 characters';
-                            }
-                          },
                         ),
-                      ),*/
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/9,
+                        width: MediaQuery.of(context).size.width/1.5,
                         child: TextFormField(
                           controller: _emailController,
                           validator: (value) {
@@ -97,44 +98,11 @@ class _UserAddPageState extends State<UserAddPage> {
                                 BorderSide(color: Colors.grey, width: 0.0),
                               ),
                               border: OutlineInputBorder()),
-                          /*
-                          onFieldSubmitted: (value) {
-                            setState(() {
-                              email = value;
-                            });
-                          },
-                           */
                         ),
                       ),
-                      /*
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              labelText: 'Phone Number',
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                borderSide:
-                                BorderSide(color: Colors.grey, width: 0.0),
-                              ),
-                              border: OutlineInputBorder()),
-                          onFieldSubmitted: (value) {
-                            setState(() {
-                              name = value;
-                            });
-                          },
-                          validator: (value) {
-                            if (value == null || value.isEmpty || value.length < 10) {
-                              return 'Phone Number must contain at least 10 characters';
-                            }
-                          },
-                        ),
-                      ),
-                      */
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 20.0, left: 20.0, right: 20.0),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/9,
+                        width: MediaQuery.of(context).size.width/1.5,
                         child: TextFormField(
                           controller: _passwordController,
                           validator: (value) {
@@ -153,21 +121,90 @@ class _UserAddPageState extends State<UserAddPage> {
                                 BorderSide(color: Colors.grey, width: 0.0),
                               ),
                               border: OutlineInputBorder()),
-                          /*
-                          onFieldSubmitted: (value) {
-                            setState(() {
-                              password = value;
-                            });
-                          },
-                           */
                         ),
                       ),
-                      const SizedBox(height: 20,),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/9,
+                        width: MediaQuery.of(context).size.width/1.5,
+                        child: TextFormField(
+                          controller: _phoneNumberController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Phone number must contain a value';
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Phone Number',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                borderSide:
+                                BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: OutlineInputBorder()
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/9,
+                        width: MediaQuery.of(context).size.width/1.5,
+                        child: TextFormField(
+                          controller: _addressController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Address must contain a value';
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Address',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                borderSide:
+                                BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: OutlineInputBorder()
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height/9,
+                        width: MediaQuery.of(context).size.width/1.5,
+                        child: TextFormField(
+                          controller: _gymIDController,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Gym ID must contain a value';
+                            }
+                          },
+                          decoration: const InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
+                              labelText: 'Gym ID',
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                                borderSide:
+                                BorderSide(color: Colors.grey, width: 0.0),
+                              ),
+                              border: OutlineInputBorder()
+                          ),
+                        ),
+                      ),
                       ElevatedButton(
                         onPressed: () async {
                           // Validate returns true if the form is valid, or false otherwise.
                           if (_formKey.currentState!.validate()) {
-                            var res = await apiService.addUser(_emailController.text, _passwordController.text, 'MEMBER', 1);
+                            String userType = '';
+                            int gymID = int.parse(_gymIDController.text);
+                            if(widget.tempNumber == 1) {
+                              userType = 'MEMBER';
+                            }
+                            if(widget.tempNumber == 2) {
+                              userType = 'PT';
+                            }
+                            var res = await apiService.addUser(_nameController.text, _emailController.text, _passwordController.text, _phoneNumberController.text, _addressController.text, gymID, userType);
                             switch (res!.statusCode) {
                               case 201:
                                 print('added member');
@@ -185,8 +222,8 @@ class _UserAddPageState extends State<UserAddPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(25)
                           ),
-                          minimumSize: const Size(350, 50),
-                          maximumSize: const Size(350, 50),
+                          minimumSize: const Size(200, 50),
+                          maximumSize: const Size(200, 50),
                         ),
                         child: const Text("Add User"),
                       ),

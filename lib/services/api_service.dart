@@ -35,7 +35,7 @@ class ApiService {
     return null;
   }
 
-  Future<Response?> addUser(String email, String password, String role, int gym_id) async {
+  Future<Response?> addUser(String name, String email, String password, String phoneNumber, String address, int gymID, String role) async {
     try{
       String token = await tokenOrEmpty;
       Map<String, String> requestHeaders = {
@@ -44,10 +44,13 @@ class ApiService {
         'Cookie': 'Authorization=$token'
       };
       Map data = {
+        'name': name,
         'email': email,
         'password': password,
+        'phone_number': phoneNumber,
+        'address': address,
+        'gym_id': gymID,
         'role': role,
-        'gym_id': gym_id,
       };
       print(token.toString());
       Response response = await post(

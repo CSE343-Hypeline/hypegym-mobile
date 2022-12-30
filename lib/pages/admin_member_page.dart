@@ -81,7 +81,7 @@ class _AdminMemberPageState extends State<AdminMemberPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
-          Navigator.push(context, MaterialPageRoute(builder: (context) => const UserAddPage()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const UserAddPage(1)));
         },
         backgroundColor: Colors.greenAccent.shade400,
         foregroundColor: Colors.black,

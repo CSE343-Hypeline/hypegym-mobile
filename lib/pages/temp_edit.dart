@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class TempEdit extends StatefulWidget {
   const TempEdit(this.memberMeasurement, {super.key});
@@ -8,7 +9,7 @@ class TempEdit extends StatefulWidget {
 }
 
 class _TempEditState extends State<TempEdit> {
-  final _inController = TextEditingController();
+  late final TextInputType keyboardType;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,40 +51,15 @@ class _TempEditState extends State<TempEdit> {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
-                        controller: _inController,
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Input can not be empty';
-                          }
-                        },
+                        controller: TextEditingController(text: e.value.toString()),
                         style: const TextStyle(color: Colors.white),
-                        onChanged: (value) {},
-                        autocorrect: true,
-                        decoration: InputDecoration(
-                          errorStyle: const TextStyle(color: Colors.red),
-                          fillColor: Colors.black38,
-                          enabledBorder: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                            borderSide: BorderSide(
-                                color: Colors.greenAccent.shade400, width: 1),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                            borderSide: BorderSide(
-                                color: Colors.greenAccent.shade400, width: 1),
-                          ),
-                          hintText: e.value.toString(),
-                          hintStyle: const TextStyle(
-                            height: 0.8,
-                            fontSize: 14.0,
-                            fontWeight: FontWeight.w300,
-                            color: Colors.white,
-                          ),
-                          filled: true,
-                        ),
+                        //initialValue: e.value.toString(),
+                        keyboardType: TextInputType.text,
+                        onFieldSubmitted: (val){
+                          widget.memberMeasurement[e.key] = val;
+                        },
                       ),
                     ),
-                      //Text(e.value.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)
                   ),
                 ]))
                     .toList(),

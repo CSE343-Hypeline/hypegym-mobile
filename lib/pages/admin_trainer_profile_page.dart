@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/pages/admin_gym_page.dart';
 import 'package:hypegym/services/api_service.dart';
+import 'package:hypegym/models/user.dart';
 
 class AdminTrainerProfilePage extends StatefulWidget {
-  const AdminTrainerProfilePage({Key? key}) : super(key: key);
+  const AdminTrainerProfilePage(this.user, {super.key});
+  final UserDto user;
 
   @override
   State<AdminTrainerProfilePage> createState() => _AdminTrainerProfilePageState();
@@ -45,6 +47,7 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
               const SizedBox(height: 24),
               Column(
                 children: [
+                  /*
                   Text(
                     "Name",
                     style: TextStyle(
@@ -62,7 +65,8 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                   */
+                  const SizedBox(height: 4),
                   Text(
                     "Email",
                     style: TextStyle(
@@ -72,15 +76,16 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "erayozkan@gmail.com",
-                    style: TextStyle(
+                  Text(
+                    widget.user.email,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 24),
+                  /*
                   Text(
                     "Phone",
                     style: TextStyle(
@@ -116,6 +121,7 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 24),
+                   */
                   ElevatedButton(
                     onPressed: (){
                       //Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
@@ -158,7 +164,7 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                             action: SnackBarAction(
                               label: 'DELETE',
                               onPressed: () async {
-                                var res = await apiService.deleteUser(2);
+                                var res = await apiService.deleteUser(widget.user.ID);
                                 switch (res!.statusCode) {
                                   case 200:
                                     print('deleted member');
