@@ -189,12 +189,13 @@ class _LoginPageState extends State<LoginPage> {
                               case 200:
                                 final User user = User.fromJson(jsonDecode(resMe.body));
                                 if(user.role == "SUPERADMIN"){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
                                 } else if(user.role == "PT"){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const TrainerGymPage()));
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const TrainerGymPage()));
                                 } else if(user.role == "MEMBER"){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context) => const MemberGymPage()));
+                                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const MemberGymPage()));
                                 }
+
                                   break;
                                 case 401:
                                 break;
