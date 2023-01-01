@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+//import 'package:hypegym/pages/edit_profile_page.dart';
 import 'package:hypegym/pages/login_page.dart';
 
 class AdminProfiePage extends StatefulWidget {
@@ -8,7 +9,7 @@ class AdminProfiePage extends StatefulWidget {
   @override
   State<AdminProfiePage> createState() => _AdminProfiePageState();
 }
-
+// buraya adminin bilgilerini backendden cekmemz ve edit sayfasina bunu gondermemiz lazim
 class _AdminProfiePageState extends State<AdminProfiePage> {
 
   final storage = const FlutterSecureStorage();
@@ -136,7 +137,7 @@ class _AdminProfiePageState extends State<AdminProfiePage> {
                   ),
                   ElevatedButton(
                     onPressed: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfilePage()));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,

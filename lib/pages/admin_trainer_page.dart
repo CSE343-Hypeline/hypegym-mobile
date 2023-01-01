@@ -41,7 +41,7 @@ class _AdminTrainerPageState extends State<AdminTrainerPage>{
             ),
             Expanded(
               child: FutureBuilder<List<UserDto>>(
-                future: apiService.fetchTrainers(1),
+                future: apiService.fetchTrainers(1), //gym id yollamamiz lazim
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
