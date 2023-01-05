@@ -20,14 +20,13 @@ class _UserAddPageState extends State<UserAddPage> {
   final _passwordController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _addressController = TextEditingController();
-
-
+  String gender = 'MALE';
+  String dropdownValue = '1 Month';
 
   @override
   Widget build(BuildContext context) {
-    String gender = "OTHER";
-    const List<String> list = <String>['1 Month', '2 Months', '3 Months', '6 Months','9 Months','12 Months'];
-    String dropdownValue = list.first;
+    //const List<String> list = <String>['1 Month', '2 Months', '3 Months', '6 Months','9 Months','12 Months'];
+    //String dropdownValue = list.first;
     return Scaffold(
       body: Stack(
         children: [
@@ -173,79 +172,105 @@ class _UserAddPageState extends State<UserAddPage> {
                           ),
                         ),
                       ),
+                      Theme(
+                        data: ThemeData(unselectedWidgetColor: Colors.white),
+                        child: SizedBox(
+                          height: MediaQuery.of(context).size.height/3,
+                          width: MediaQuery.of(context).size.width/1.5,
+                          child: ListView(
+                            children: [
+                              Text("Gender", style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold, fontSize: 15.0,),),
+                              //SizedBox(height: MediaQuery.of(context).size.height/30,),
+                              RadioListTile<String>(
+                                activeColor: Colors.greenAccent.shade400,
+                                secondary: const Icon(Icons.male, color: Colors.white,),
+                                controlAffinity: ListTileControlAffinity.trailing,
+                                title: const Text('Male', style: TextStyle(color: Colors.white),),
+                                value: 'MALE',
+                                groupValue: gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    gender = value.toString();
+                                  });
+                                },
+                              ),
+                              RadioListTile<String>(
+                                activeColor: Colors.greenAccent.shade400,
+                                secondary: const Icon(Icons.female, color: Colors.white,),
+                                controlAffinity: ListTileControlAffinity.trailing,
+                                title: const Text('Female', style: TextStyle(color: Colors.white),),
+                                value: 'FEMALE',
+                                groupValue: gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    gender = value.toString();
+                                  });
+                                },
+                              ),
+                              RadioListTile<String>(
+                                activeColor: Colors.greenAccent.shade400,
+                                secondary: const Icon(Icons.transgender, color: Colors.white,),
+                                controlAffinity: ListTileControlAffinity.trailing,
+                                title: const Text('Other', style: TextStyle(color: Colors.white),),
+                                value: 'OTHER',
+                                groupValue: gender,
+                                onChanged: (value) {
+                                  setState(() {
+                                    gender = value.toString();
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: MediaQuery.of(context).size.height/35,),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height/3,
+                        height: MediaQuery.of(context).size.height/7,
                         width: MediaQuery.of(context).size.width/1.5,
-                        child: ListView(
-
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // 3.
-                            RadioListTile<String>(
-                              secondary: const Icon(Icons.male),
-                              controlAffinity: ListTileControlAffinity.trailing,
-                              title: const Text('Male'),
-                              // 4.
-                              value: 'MALE',
-                              // 5.
-                              groupValue: gender,
-                              // 6.
-                              onChanged: (value) {
-                                setState(() {
-                                  gender = value as String;
-                                });
-                              },
+                            Text(
+                              "Membership",
+                              style: TextStyle(
+                                color: Colors.greenAccent.shade400,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15.0,),
                             ),
-                            RadioListTile<String>(
-                              secondary: Icon(Icons.female),
-                              controlAffinity: ListTileControlAffinity.trailing,
-                              title: const Text('Female'),
-                              value: 'FEMALE',
-                              groupValue: gender,
-                              onChanged: (value) {
+                            SizedBox(height: MediaQuery.of(context).size.height/60,),
+                            DropdownButtonFormField(
+                              decoration: const InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white, width: 2),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white, width: 2),
+                                ),
+                                filled: true,
+                                fillColor: Colors.white,
+                              ),
+                              dropdownColor: Colors.white,
+                              value: dropdownValue,
+                              onChanged: (String? newValue) {
                                 setState(() {
-                                  gender = value as String;
+                                  dropdownValue = newValue!;
                                 });
                               },
-                            ),
-                            RadioListTile<String>(
-                              controlAffinity: ListTileControlAffinity.trailing,
-                              title: const Text('Other'),
-                              value: 'OTHER',
-                              groupValue: gender,
-                              onChanged: (value) {
-                                setState(() {
-                                  gender = value as String;
-                                });
-                              },
+                              items: <String>['1 Month', '2 Months', '3 Months', '6 Months','9 Months','12 Months'].map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(
+                                    value,
+                                    style: const TextStyle(fontSize: 15),
+                                  ),
+                                );
+                              }).toList(),
                             ),
                           ],
                         ),
                       ),
-
-
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height/9,
-                        width: MediaQuery.of(context).size.width/1.5,
-                        child: DropdownButtonFormField<String>(
-                          value: dropdownValue,
-                          icon: const Icon(Icons.arrow_downward),
-                          elevation: 16,
-                          style: const TextStyle(color: Colors.deepPurple),
-
-                          onChanged: (String? value) {
-                            // This is called when the user selects an item.
-                            setState(() {
-                              dropdownValue = value!;
-                            });
-                          },
-                          items: list.map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ),
+                      SizedBox(height: MediaQuery.of(context).size.height/25,),
                       ElevatedButton(
                         onPressed: () async {
                           // Validate returns true if the form is valid, or false otherwise.
