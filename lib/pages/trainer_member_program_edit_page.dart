@@ -35,7 +35,7 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
                   Text(
                     "EXERCISES",
                     style: TextStyle(
-                      fontSize: 50,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent.shade400,
                     ),

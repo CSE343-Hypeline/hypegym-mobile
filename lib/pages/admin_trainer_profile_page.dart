@@ -48,7 +48,6 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
               const SizedBox(height: 24),
               Column(
                 children: [
-                  /*
                   Text(
                     "Name",
                     style: TextStyle(
@@ -58,16 +57,15 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "Eray Ozkan",
-                    style: TextStyle(
+                  Text(
+                    widget.user.name,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
-                   */
-                  const SizedBox(height: 4),
+                  const SizedBox(height: 24),
                   Text(
                     "Email",
                     style: TextStyle(
@@ -86,9 +84,8 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  /*
                   Text(
-                    "Phone",
+                    "Phone Number",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -96,9 +93,9 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "+90 539 939 39 39",
-                    style: TextStyle(
+                  Text(
+                    "+90 ${widget.user.phone_number}",
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -106,23 +103,23 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    "Experience",
+                    "Address",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent.shade400,
                     ),
                   ),
-                  const Text(
-                    "3 Years",
-                    style: TextStyle(
+                  const SizedBox(height: 4),
+                  Text(
+                    widget.user.adress,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 24),
-                   */
                   ElevatedButton(
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => AdminListMemberPage(widget.user)));

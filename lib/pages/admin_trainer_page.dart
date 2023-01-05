@@ -31,7 +31,7 @@ class _AdminTrainerPageState extends State<AdminTrainerPage>{
                   Text(
                     "TRAINERS",
                     style: TextStyle(
-                      fontSize: 50,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent.shade400,
                     ),

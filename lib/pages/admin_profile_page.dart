@@ -52,7 +52,7 @@ class _AdminProfiePageState extends State<AdminProfiePage> {
                     Text(
                       "PROFILE",
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent.shade400,
                       ),

@@ -48,7 +48,7 @@ class AboutUsPage extends StatelessWidget {
                       "ABOUT US",
                       style: TextStyle(
                         backgroundColor: Colors.black.withOpacity(0.5),
-                        fontSize: 50,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent.shade400,
                       ),

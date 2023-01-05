@@ -29,7 +29,7 @@ class _TrainerMemberPageState extends State<TrainerMemberPage> {
                   Text(
                     "MEMBERS",
                     style: TextStyle(
-                      fontSize: 50,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent.shade400,
                     ),

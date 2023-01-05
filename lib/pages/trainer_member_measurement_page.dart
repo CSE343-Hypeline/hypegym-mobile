@@ -30,7 +30,7 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
                   Text(
                     "MEASUREMENTS",
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent.shade400,
                     ),

@@ -75,107 +75,114 @@ class _LoginPageState extends State<LoginPage> {
                     ],
                   ),
                   const SizedBox(height: 320,),
-                  TextFormField(
-                    controller: _emailController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty || value.length < 3) {
-                        return 'First Name must contain at least 3 characters';
-                      }
-                    },
-                    style: const TextStyle(color: Colors.white),
-                    onChanged: (value) {},
-                    autocorrect: true,
-                    decoration: InputDecoration(
-                      errorStyle: const TextStyle(color: Colors.red),
-                      fillColor: Colors.black54,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(
-                            color: Colors.greenAccent.shade400, width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                        borderSide: BorderSide(
-                            color: Colors.greenAccent.shade400, width: 1),
-                      ),
-                      labelText: 'Email',
-                      hintText: 'Email',
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                        child: Icon(
-                          Icons.email,
-                          color: Colors.greenAccent.shade400,
-                          size: 24,
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/9,
+                    width: MediaQuery.of(context).size.width/1.2,
+                    child: TextFormField(
+                      controller: _emailController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty || value.length < 3) {
+                          return 'First Name must contain at least 3 characters';
+                        }
+                      },
+                      style: const TextStyle(color: Colors.white),
+                      onChanged: (value) {},
+                      autocorrect: true,
+                      decoration: InputDecoration(
+                        errorStyle: const TextStyle(color: Colors.red),
+                        fillColor: Colors.black54,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(
+                              color: Colors.greenAccent.shade400, width: 1),
                         ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                          borderSide: BorderSide(
+                              color: Colors.greenAccent.shade400, width: 1),
+                        ),
+                        labelText: 'Email',
+                        hintText: 'Email',
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                          child: Icon(
+                            Icons.email,
+                            color: Colors.greenAccent.shade400,
+                            size: 24,
+                          ),
+                        ),
+                        labelStyle: TextStyle(
+                          height: 1.171875,
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.greenAccent.shade400,
+                        ),
+                        hintStyle: TextStyle(
+                          height: 1.171875,
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w300,
+                          color: Colors.greenAccent.shade400,
+                        ),
+                        filled: true,
                       ),
-                      labelStyle: TextStyle(
-                        height: 1.171875,
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.greenAccent.shade400,
+                    ),
+                  ),
+                  const SizedBox(height: 10,),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height/9,
+                    width: MediaQuery.of(context).size.width/1.2,
+                    child: TextFormField(
+                      controller: _passwordController,
+                      validator: (value) {
+                        if (value == null || value.isEmpty || value.length < 3) {
+                          return 'First Name must contain at least 3 characters';
+                        }
+                      },
+                      style: const TextStyle(color: Colors.white),
+                      onChanged: (value) {},
+                      autocorrect: true,
+                      obscureText: true,
+                      keyboardType: TextInputType.emailAddress,
+                      decoration: InputDecoration(
+                        errorStyle: const TextStyle(color: Colors.red),
+                        fillColor: Colors.black54,
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+                          borderSide: BorderSide(
+                              color: Colors.greenAccent.shade400, width: 1),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: const BorderRadius.all(Radius.circular(5.0)),
+                          borderSide: BorderSide(
+                              color: Colors.greenAccent.shade400, width: 1),
+                        ),
+                        labelText: 'Password',
+                        hintText: 'Password',
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
+                          child: Icon(
+                            Icons.password,
+                            color: Colors.greenAccent.shade400,
+                            size: 24,
+                          ),
+                        ),
+                        labelStyle: TextStyle(
+                            height: 1.171875,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.greenAccent.shade400),
+                        hintStyle: TextStyle(
+                            height: 1.171875,
+                            fontSize: 24.0,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.greenAccent.shade400),
+                        filled: true,
                       ),
-                      hintStyle: TextStyle(
-                        height: 1.171875,
-                        fontSize: 24.0,
-                        fontWeight: FontWeight.w300,
-                        color: Colors.greenAccent.shade400,
-                      ),
-                      filled: true,
                     ),
                   ),
                   const SizedBox(height: 20,),
-                  TextFormField(
-                    controller: _passwordController,
-                    validator: (value) {
-                      if (value == null || value.isEmpty || value.length < 3) {
-                        return 'First Name must contain at least 3 characters';
-                      }
-                    },
-                    style: const TextStyle(color: Colors.white),
-                    onChanged: (value) {},
-                    autocorrect: true,
-                    obscureText: true,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: InputDecoration(
-                      errorStyle: const TextStyle(color: Colors.red),
-                      fillColor: Colors.black54,
-                      enabledBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-                        borderSide: BorderSide(
-                            color: Colors.greenAccent.shade400, width: 1),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: const BorderRadius.all(Radius.circular(5.0)),
-                        borderSide: BorderSide(
-                            color: Colors.greenAccent.shade400, width: 1),
-                      ),
-                      labelText: 'Password',
-                      hintText: 'Password',
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.fromLTRB(20.0, 0.0, 20.0, 0.0),
-                        child: Icon(
-                          Icons.password,
-                          color: Colors.greenAccent.shade400,
-                          size: 24,
-                        ),
-                      ),
-                      labelStyle: TextStyle(
-                          height: 1.171875,
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.greenAccent.shade400),
-                      hintStyle: TextStyle(
-                          height: 1.171875,
-                          fontSize: 24.0,
-                          fontWeight: FontWeight.w300,
-                          color: Colors.greenAccent.shade400),
-                      filled: true,
-                    ),
-                  ),
-                  const SizedBox(height: 30,),
                   ElevatedButton(
                     onPressed: () async {
-                      //login(_emailController.text.toString(), _passwordController.text.toString());
                       if (_formKey.currentState!.validate()) {
                         var res = await authService.login(_emailController.text, _passwordController.text);
                         //print(res?.headers);

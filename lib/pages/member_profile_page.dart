@@ -39,7 +39,7 @@ class _MemberProfilePageState extends State<MemberProfilePage> {
                     Text(
                       "PROFILE",
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent.shade400,
                       ),

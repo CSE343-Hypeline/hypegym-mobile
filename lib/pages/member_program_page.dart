@@ -26,7 +26,7 @@ class _MemberProgramPageState extends State<MemberProgramPage> {
                   Text(
                     "MY EXERCISES",
                     style: TextStyle(
-                      fontSize: 40,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent.shade400,
                     ),

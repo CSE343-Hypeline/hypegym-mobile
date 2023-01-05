@@ -37,7 +37,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     Text(
                       "MEMBER PROFILE",
                       style: TextStyle(
-                        fontSize: 40,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent.shade400,
                       ),
@@ -45,10 +45,8 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                   ],
                 ),
               ),
-              const SizedBox(height: 24),
               Column(
                 children: [
-                  /*
                   Text(
                     "Name",
                     style: TextStyle(
@@ -58,16 +56,15 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "Eray Ozkan",
-                    style: TextStyle(
+                  Text(
+                    widget.user.name,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 24),
-                  */
                   Text(
                     "Email",
                     style: TextStyle(
@@ -86,9 +83,8 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 24),
-                  /*
                   Text(
-                    "Phone",
+                    "Phone Number",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -96,9 +92,9 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "+90 539 939 39 39",
-                    style: TextStyle(
+                  Text(
+                    "+90 ${widget.user.phone_number}",
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
@@ -106,7 +102,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    "Trainer Name",
+                    "Address",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -114,16 +110,15 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                     ),
                   ),
                   const SizedBox(height: 4),
-                  const Text(
-                    "Burcu Akar",
-                    style: TextStyle(
+                  Text(
+                    widget.user.adress,
+                    style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                     ),
                   ),
                   const SizedBox(height: 24),
-                  */
                   ElevatedButton(
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => AdminPTAssignPage(widget.user)));
