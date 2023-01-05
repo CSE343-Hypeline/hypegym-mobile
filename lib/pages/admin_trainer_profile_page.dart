@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/pages/admin_gym_page.dart';
+import 'package:hypegym/pages/admin_list_member_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/user.dart';
 
@@ -124,7 +125,7 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                    */
                   ElevatedButton(
                     onPressed: (){
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => AdminListMemberPage(widget.user)));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.greenAccent.shade700,

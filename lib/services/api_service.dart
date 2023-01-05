@@ -35,7 +35,7 @@ class ApiService {
     return null;
   }
 
-  Future<Response?> addUser(String name, String email, String password, String phoneNumber, String address, int gymID, String role) async {
+  Future<Response?> addUser(String name, String email, String password, String phoneNumber, String gender,String address, int gymID, String role) async {
     try{
       String token = await tokenOrEmpty;
       Map<String, String> requestHeaders = {
@@ -51,6 +51,7 @@ class ApiService {
         'address': address,
         'gym_id': gymID,
         'role': role,
+        'gender': gender,
       };
       print(token.toString());
       Response response = await post(
@@ -119,6 +120,54 @@ class ApiService {
 
     final response = await get(
         Uri.parse('${Constants.baseUrl}/api/users/pts/$gym_id'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      final List result = json.decode(response.body);
+      return result.map((e) => UserDto.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<Response?> assignPT(int member_id,int pt_id) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      print(token.toString());
+      Map data = {
+        'user_id': member_id,
+      };
+      print(token.toString());
+      Response response = await post(
+          Uri.parse('${Constants.baseUrl}/api/pt/${pt_id}/assign-member'),
+          headers: requestHeaders,
+          body: json.encode(data)
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
+  }
+
+  Future<List<UserDto>> getMembers(int pt_id) async {
+    String token = await tokenOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/pt/${pt_id}/members)'),
         headers: requestHeaders
     );
 

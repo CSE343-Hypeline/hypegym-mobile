@@ -20,10 +20,14 @@ class _UserAddPageState extends State<UserAddPage> {
   final _passwordController = TextEditingController();
   final _phoneNumberController = TextEditingController();
   final _addressController = TextEditingController();
-  final _gymIDController = TextEditingController();
+
+
 
   @override
   Widget build(BuildContext context) {
+    String gender = "OTHER";
+    const List<String> list = <String>['1 Month', '2 Months', '3 Months', '6 Months','9 Months','12 Months'];
+    String dropdownValue = list.first;
     return Scaffold(
       body: Stack(
         children: [
@@ -170,41 +174,90 @@ class _UserAddPageState extends State<UserAddPage> {
                         ),
                       ),
                       SizedBox(
+                        height: MediaQuery.of(context).size.height/3,
+                        width: MediaQuery.of(context).size.width/1.5,
+                        child: ListView(
+
+                          children: [
+                            // 3.
+                            RadioListTile<String>(
+                              secondary: const Icon(Icons.male),
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              title: const Text('Male'),
+                              // 4.
+                              value: 'MALE',
+                              // 5.
+                              groupValue: gender,
+                              // 6.
+                              onChanged: (value) {
+                                setState(() {
+                                  gender = value as String;
+                                });
+                              },
+                            ),
+                            RadioListTile<String>(
+                              secondary: Icon(Icons.female),
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              title: const Text('Female'),
+                              value: 'FEMALE',
+                              groupValue: gender,
+                              onChanged: (value) {
+                                setState(() {
+                                  gender = value as String;
+                                });
+                              },
+                            ),
+                            RadioListTile<String>(
+                              controlAffinity: ListTileControlAffinity.trailing,
+                              title: const Text('Other'),
+                              value: 'OTHER',
+                              groupValue: gender,
+                              onChanged: (value) {
+                                setState(() {
+                                  gender = value as String;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ),
+
+
+                      SizedBox(
                         height: MediaQuery.of(context).size.height/9,
                         width: MediaQuery.of(context).size.width/1.5,
-                        child: TextFormField(
-                          controller: _gymIDController,
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Gym ID must contain a value';
-                            }
+                        child: DropdownButtonFormField<String>(
+                          value: dropdownValue,
+                          icon: const Icon(Icons.arrow_downward),
+                          elevation: 16,
+                          style: const TextStyle(color: Colors.deepPurple),
+
+                          onChanged: (String? value) {
+                            // This is called when the user selects an item.
+                            setState(() {
+                              dropdownValue = value!;
+                            });
                           },
-                          decoration: const InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              labelText: 'Gym ID',
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                                borderSide:
-                                BorderSide(color: Colors.grey, width: 0.0),
-                              ),
-                              border: OutlineInputBorder()
-                          ),
+                          items: list.map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
                         ),
                       ),
                       ElevatedButton(
                         onPressed: () async {
                           // Validate returns true if the form is valid, or false otherwise.
-                          if (_formKey.currentState!.validate()) {
+                          if (_formKey.currentState!.validate() && gender != null) {
                             String userType = '';
-                            int gymID = int.parse(_gymIDController.text);
                             if(widget.tempNumber == 1) {
                               userType = 'MEMBER';
                             }
                             if(widget.tempNumber == 2) {
                               userType = 'PT';
                             }
-                            var res = await apiService.addUser(_nameController.text, _emailController.text, _passwordController.text, _phoneNumberController.text, _addressController.text, gymID, userType);
+                            var res = await apiService.addUser(_nameController.text, _emailController.text, _passwordController.text, _phoneNumberController.text, gender,_addressController.text, 1, userType);
                             switch (res!.statusCode) {
                               case 201:
                                 print('added member');
