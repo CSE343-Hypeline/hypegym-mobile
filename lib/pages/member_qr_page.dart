@@ -60,7 +60,10 @@ class _MemberQrPageState extends State<MemberQrPage> {
                             child: FutureBuilder(
                               future: controller?.getFlashStatus(),
                               builder: (context, snapshot) {
-                                return Text('Flash: ${snapshot.data}');
+                                //return Text('Flash: ${snapshot.data}');
+                                return (snapshot.data == true
+                                    ? const Icon(Icons.flash_on)
+                                    : const Icon(Icons.flash_off));
                               },
                             )),
                       ),

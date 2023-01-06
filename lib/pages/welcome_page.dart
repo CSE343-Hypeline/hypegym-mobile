@@ -5,6 +5,7 @@ import 'package:hypegym/pages/about_us_page.dart';
 //import 'package:hypegym/pages/trainer_gym_page.dart';
 //import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/pages/login_page.dart';
+//import 'package:hypegym/pages/member_gym_page.dart';
 
 class WelcomePage extends StatefulWidget {
   const WelcomePage({Key? key}) : super(key: key);

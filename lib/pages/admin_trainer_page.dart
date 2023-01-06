@@ -50,7 +50,7 @@ class _AdminTrainerPageState extends State<AdminTrainerPage>{
                       itemBuilder: (context, index) {
                         return ListTile(
                           leading: const Icon(Icons.account_circle, color: Colors.white,),
-                          title: Text(snapshot.data![index].email.toString()),
+                          title: Text(snapshot.data![index].name.toString()),
                           trailing: Wrap(
                             spacing: 12,
                             children: <Widget>[
