@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:hypegym/pages/profile_page.dart';
 import 'package:hypegym/pages/trainer_member_page.dart';
-import 'package:hypegym/pages/trainer_profile_page.dart';
 
 class TrainerGymPage extends StatefulWidget {
   const TrainerGymPage({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _TrainerGymPageState extends State<TrainerGymPage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     TrainerMemberPage(),
-    TrainerProfilePage(),
+    ProfiePage(),
   ];
 
   void _onItemTapped(int index){

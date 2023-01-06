@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/pages/admin_gym_information_page.dart';
 import 'package:hypegym/pages/admin_member_page.dart';
-import 'package:hypegym/pages/admin_profile_page.dart';
+import 'package:hypegym/pages/profile_page.dart';
 import 'package:hypegym/pages/admin_trainer_page.dart';
 //import 'package:hypegym_yedek_1/pages/member_list.dart';
 
@@ -19,7 +19,7 @@ class _AdminGymPageState extends State<AdminGymPage> {
     AdminGymInformationPage(),
     AdminTrainerPage(),
     AdminMemberPage(),
-    AdminProfiePage(),
+    ProfiePage(),
   ];
 
   void _onItemTapped(int index){
