@@ -45,7 +45,7 @@ class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
             ),
             Expanded(
               child: FutureBuilder<List<UserDto>>(
-                future: apiService.fetchTrainers(widget.user.gymId), //gym id yollamamiz lazim
+                future: apiService.getTrainers(widget.user.gymId), //gym id yollamamiz lazim
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
@@ -82,7 +82,7 @@ class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
                             switch (res!.statusCode) {
                               case 200:
                                 print('assigned to member');
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => AdminMemberProfilePage(widget.user)));
+                                Navigator.pop(context);
                                 break;
                               default:
                                 print('member not assign');

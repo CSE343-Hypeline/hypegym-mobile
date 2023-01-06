@@ -15,10 +15,10 @@ class _MemberGymPageState extends State<MemberGymPage> {
   int selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    MemberProgramPage(),
     MemberQrPage(),
+    MemberProgramPage(),
     MemberMeasurementPage(),
-    ProfiePage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index){

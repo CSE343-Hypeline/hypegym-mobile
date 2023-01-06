@@ -78,7 +78,7 @@ class UserEditDto {
     required this.email,
     required this.phone_number,
     required this.gender,
-    required this.address,});
+    required this.address});
 
   factory UserEditDto.fromJson(Map<String, dynamic> json) {
     return UserEditDto(
@@ -94,7 +94,7 @@ class UserEditDto {
     'email': email,
     'phone_number': phone_number,
     'gender': gender,
-    'address': address,
+    'address': address
   };
 }
 

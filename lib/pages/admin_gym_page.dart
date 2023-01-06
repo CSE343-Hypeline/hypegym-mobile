@@ -19,7 +19,7 @@ class _AdminGymPageState extends State<AdminGymPage> {
     AdminGymInformationPage(),
     AdminTrainerPage(),
     AdminMemberPage(),
-    ProfiePage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index){

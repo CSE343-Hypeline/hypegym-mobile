@@ -15,7 +15,7 @@ class _TrainerGymPageState extends State<TrainerGymPage> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     TrainerMemberPage(),
-    ProfiePage(),
+    ProfilePage(),
   ];
 
   void _onItemTapped(int index){

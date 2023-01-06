@@ -41,7 +41,7 @@ class _AdminMemberPageState extends State<AdminMemberPage> {
             ),
             Expanded(
               child: FutureBuilder<List<UserDto>>(
-                future: apiService.fetchMembers(1),
+                future: apiService.fetchMembers(),
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(

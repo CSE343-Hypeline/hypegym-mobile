@@ -1,9 +1,10 @@
 import 'dart:convert';
-
+import 'package:dcdg/dcdg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hypegym/models/user.dart';
 import 'package:hypegym/pages/admin_gym_page.dart';
+import 'package:hypegym/pages/member_gym_page.dart';
 import 'package:hypegym/pages/trainer_gym_page.dart';
 import 'package:hypegym/pages/welcome_page.dart';
 import 'package:hypegym/services/api_service.dart';
@@ -59,12 +60,11 @@ class MyApp extends StatelessWidget {
 }
 
 directpage(int direct){
-  print(direct);
   switch (direct){
     case 1:  return const WelcomePage();
     case 2:  return const AdminGymPage();
-    case 3:  return const WelcomePage();
-    case 4:  return const AdminGymPage();
+    case 3:  return const TrainerGymPage();
+    case 4:  return const MemberGymPage();
     default: return const WelcomePage();
   };
 }

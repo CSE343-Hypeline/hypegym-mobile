@@ -203,6 +203,7 @@ class _LoginPageState extends State<LoginPage> {
                           case 200:
                             var data = jsonDecode(res.body);
                             storage.write(key: "token", value: data['token']);
+                            storage.write(key: 'check-in-out', value: 'check-in');
                             //if (!mounted) return;
                             var resMe = await apiService.getMe();
                             switch (resMe!.statusCode) {

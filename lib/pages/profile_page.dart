@@ -6,14 +6,14 @@ import 'package:hypegym/models/user.dart';
 import 'package:hypegym/pages/login_page.dart';
 import 'package:hypegym/services/api_service.dart';
 
-class ProfiePage extends StatefulWidget {
-  const ProfiePage({Key? key}) : super(key: key);
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({Key? key}) : super(key: key);
 
   @override
-  State<ProfiePage> createState() => _ProfiePageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _ProfiePageState extends State<ProfiePage> {
+class _ProfilePageState extends State<ProfilePage> {
   final ApiService apiService = ApiService();
   final storage = const FlutterSecureStorage();
   late final User user;
@@ -48,8 +48,7 @@ class _ProfiePageState extends State<ProfiePage> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              storage.delete(key: "token");
-                              storage.delete(key: "user");
+                              storage.deleteAll();
                               Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                             },
                             icon: Icon(

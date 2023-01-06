@@ -1,8 +1,12 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hypegym/models/user.dart';
+import 'package:hypegym/services/api_service.dart';
 import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 class MemberQrPage extends StatefulWidget {
@@ -13,6 +17,8 @@ class MemberQrPage extends StatefulWidget {
 }
 
 class _MemberQrPageState extends State<MemberQrPage> {
+  final ApiService apiService = ApiService();
+  final storage = const FlutterSecureStorage();
   Barcode? result;
   QRViewController? controller;
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
@@ -151,9 +157,12 @@ class _MemberQrPageState extends State<MemberQrPage> {
     controller.scannedDataStream.listen((scanData) {
       setState(() {
         result = scanData;
+        check_in_out(result);
       });
+
     });
   }
+
 
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
@@ -169,4 +178,70 @@ class _MemberQrPageState extends State<MemberQrPage> {
     controller?.dispose();
     super.dispose();
   }
+
+  check_in_out(Barcode? res) async{
+    var gym_id = int.parse(res!.code?.substring(8) as String);
+    var token = await storage.read(key: "check-in-out");
+    var me = User.fromJson(jsonDecode(await storage.read(key: "user") as String));
+    if( (me.gymId == gym_id) && (token == 'check-in')){
+      var res = await apiService.checkIn(me.ID, me.gymId);
+      switch (res!.statusCode) {
+        case 200:
+          storage.write(key: "check-in-out", value: 'check-out');
+          return AlertDialog(
+            title: const Text('Successful'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('You are checked in'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+
+        default:
+
+          break;
+      }
+    }
+    else if( (me.gymId == gym_id) && (token == 'check-out')){
+      var res = await apiService.checkOut(me.ID, me.gymId);
+      switch (res!.statusCode) {
+        case 200:
+          storage.write(key: "check-in-out", value: 'check-in');
+          return AlertDialog(
+            title: const Text('Successful'),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: const <Widget>[
+                  Text('You are checked out'),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: const Text('OK'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+
+
+        default:
+          print('check out failed');
+          break;
+      }
+    }
+  }
+
 }
