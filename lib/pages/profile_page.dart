@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hypegym/models/user.dart';
+import 'package:hypegym/pages/edit_profile_page.dart';
 //import 'package:hypegym/pages/edit_profile_page.dart';
 import 'package:hypegym/pages/login_page.dart';
 import 'package:hypegym/services/api_service.dart';
@@ -169,7 +170,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           const SizedBox(height: 35),
                           ElevatedButton(
                             onPressed: (){
-                              //Navigator.push(context, MaterialPageRoute(builder: (context) => const EditProfilePage()));
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => EditProfilePage(snapshot.data)));
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.greenAccent.shade700,

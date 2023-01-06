@@ -25,8 +25,6 @@ class _UserAddPageState extends State<UserAddPage> {
 
   @override
   Widget build(BuildContext context) {
-    //const List<String> list = <String>['1 Month', '2 Months', '3 Months', '6 Months','9 Months','12 Months'];
-    //String dropdownValue = list.first;
     return Scaffold(
       body: Stack(
         children: [
