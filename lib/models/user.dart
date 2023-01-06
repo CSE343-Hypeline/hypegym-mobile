@@ -29,7 +29,7 @@ class UserDto {
   final String email;
   final String phone_number;
   final String gender;
-  final String adress;
+  final String address;
   final String role;
   final int gymId;
 
@@ -38,7 +38,7 @@ class UserDto {
                   required this.email,
                   required this.phone_number,
                   required this.gender,
-                  required this.adress,
+                  required this.address,
                   required this.role,
                   required this.gymId});
 
@@ -48,7 +48,7 @@ class UserDto {
                     email: json['email'],
                     phone_number: json['phone_number'],
                     gender: json['gender'],
-                    adress: json['address'],
+                    address: json['address'],
                     role: json['role'],
                     gymId: json['gym_id']);
   }
@@ -59,7 +59,7 @@ class UserDto {
     'email': email,
     'phone_number': phone_number,
     'gender': gender,
-    'adress': adress,
+    'address': address,
     'role': role,
     'gym_id': gymId,
   };
@@ -70,7 +70,7 @@ class UserEditDto {
   final String email;
   final String phone_number;
   final String gender;
-  final String adress;
+  final String address;
 
 
   const UserEditDto({
@@ -78,7 +78,7 @@ class UserEditDto {
     required this.email,
     required this.phone_number,
     required this.gender,
-    required this.adress,});
+    required this.address,});
 
   factory UserEditDto.fromJson(Map<String, dynamic> json) {
     return UserEditDto(
@@ -86,7 +86,7 @@ class UserEditDto {
         email: json['email'],
         phone_number: json['phone_number'],
         gender: json['gender'],
-        adress: json['address']);
+        address: json['address']);
   }
 
   Map<String, dynamic> toJson() => {
@@ -94,7 +94,7 @@ class UserEditDto {
     'email': email,
     'phone_number': phone_number,
     'gender': gender,
-    'adress': adress,
+    'address': address,
   };
 }
 

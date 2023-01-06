@@ -222,12 +222,47 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
+
       print(response.body.toString());
-      final List result = json.decode(response.body);
-      return result.map((e) => UserDto.fromJson(e)).toList();
+      final List result = json.decode(response.body)['members'];
+      List<UserResDto> members = result.map((e) => UserResDto.fromJson(e)).toList();
+      print(members);
+      List<UserDto> memberlist = [];
+      for(int i = 0; i<members.length ;i++){
+        var res = await getUser(members[i].ID);
+        var user = UserDto.fromJson(jsonDecode(res!.body));
+        memberlist.add(user);
+      }
+      print("memberlist ->");print(memberlist);
+      return memberlist;
     } else {
       throw Exception('Failed to load data');
     }
+  }
+
+  Future<Response?> dismissMember(int member_id,int pt_id) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      Map data = {
+        'user_id': member_id,
+      };
+      print(token.toString());
+      Response response = await delete(
+        Uri.parse('${Constants.baseUrl}/api/pt/${pt_id}/dismiss-member'),
+        headers: requestHeaders,
+        body: json.encode(data)
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
   }
 
 /*

@@ -48,7 +48,6 @@ class _AdminListMemberPageState extends State<AdminListMemberPage> {
                 future: apiService.getMembers(widget.user.ID), //gym id yollamamiz lazim
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
-
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data!.length,
@@ -57,14 +56,33 @@ class _AdminListMemberPageState extends State<AdminListMemberPage> {
                         return ListTile(
                           focusColor: Colors.grey,
                           leading: const Icon(Icons.account_circle, color: Colors.white,),
-                          title: Text(snapshot.data![index].email.toString()),
+                          title: Text(snapshot.data![index].name),
                           trailing: Wrap(
                             spacing: 12,
                             children: <Widget>[
                               IconButton(
                                 icon: const Icon(Icons.close,color: Colors.red),
-                                onPressed: (){
-
+                                onPressed: ()async {
+                                  if (await confirm(  context,
+                                    title: const Text('Confirm'),
+                                    content: const Text('Would you like to dismiss?'),
+                                    textOK: const Text('Yes'),
+                                    textCancel: const Text('No'),
+                                  ))
+                                  {
+                                    var res = await apiService.dismissMember(snapshot.data![index].ID,widget.user.ID);
+                                    switch (res!.statusCode) {
+                                      case 200:
+                                        print('assigned to member');
+                                        Navigator.pop(context);
+                                        break;
+                                      default:
+                                        print('member not dismiss');
+                                        break;
+                                    }
+                                    return;
+                                  }
+                                  return print('pressedCancel');
                                 },
                               ),
 
@@ -77,7 +95,7 @@ class _AdminListMemberPageState extends State<AdminListMemberPage> {
                             ),
                           ),
                           textColor: Colors.white,
-
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdminMemberProfilePage(snapshot.data![index]))),
                         );
                       },
                     );

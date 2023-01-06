@@ -112,7 +112,7 @@ class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    widget.user.adress,
+                    widget.user.address,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
