@@ -3,19 +3,21 @@
 class User {
   final String email;
   final String role;
+  final int ID;
   final int gymId;
   final int exp;
 
-  const User({required this.email, required this.role, required this.gymId, required this.exp});
+  const User({required this.email, required this.role,required this.ID, required this.gymId, required this.exp});
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
-        email: json['email'], role: json['role'], gymId: json['gym_id'], exp: json['exp']);
+        email: json['email'], role: json['role'], ID: json['id'], gymId: json['gym_id'], exp: json['exp']);
   }
 
   Map<String, dynamic> toJson() => {
     'email': email,
     'role': role,
+    'id': ID,
     'gym_id': gymId,
     'exp': exp,
   };

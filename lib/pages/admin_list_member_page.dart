@@ -48,6 +48,7 @@ class _AdminListMemberPageState extends State<AdminListMemberPage> {
                 future: apiService.getMembers(widget.user.ID), //gym id yollamamiz lazim
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
+
                     return ListView.builder(
                       shrinkWrap: true,
                       itemCount: snapshot.data!.length,

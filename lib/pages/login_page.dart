@@ -26,6 +26,7 @@ class _LoginPageState extends State<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final storage = const FlutterSecureStorage();
+  bool passwordVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +142,7 @@ class _LoginPageState extends State<LoginPage> {
                       style: const TextStyle(color: Colors.white),
                       onChanged: (value) {},
                       autocorrect: true,
-                      obscureText: true,
+                      obscureText: passwordVisible,
                       keyboardType: TextInputType.emailAddress,
                       decoration: InputDecoration(
                         errorStyle: const TextStyle(color: Colors.red),
@@ -177,6 +178,18 @@ class _LoginPageState extends State<LoginPage> {
                             fontWeight: FontWeight.w300,
                             color: Colors.greenAccent.shade400),
                         filled: true,
+                        suffixIcon: IconButton(
+                          icon: Icon(passwordVisible
+                              ? Icons.visibility
+                              : Icons.visibility_off,color: Colors.greenAccent.shade400),
+                          onPressed: () {
+                            setState(
+                                  () {
+                                passwordVisible = !passwordVisible;
+                              },
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -191,10 +204,11 @@ class _LoginPageState extends State<LoginPage> {
                             var data = jsonDecode(res.body);
                             storage.write(key: "token", value: data['token']);
                             //if (!mounted) return;
-                            var resMe = await apiService.getMyProfile();
+                            var resMe = await apiService.getMe();
                             switch (resMe!.statusCode) {
                               case 200:
                                 final User user = User.fromJson(jsonDecode(resMe.body));
+                                storage.write(key: "user", value: resMe.body);
                                 if(user.role == "SUPERADMIN"){
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));
                                 } else if(user.role == "PT"){

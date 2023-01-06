@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:hypegym/models/user.dart';
 //import 'package:hypegym/pages/edit_profile_page.dart';
 import 'package:hypegym/pages/login_page.dart';
+import 'package:hypegym/services/api_service.dart';
 
 class AdminProfiePage extends StatefulWidget {
   const AdminProfiePage({Key? key}) : super(key: key);
@@ -12,7 +16,27 @@ class AdminProfiePage extends StatefulWidget {
 // buraya adminin bilgilerini backendden cekmemz ve edit sayfasina bunu gondermemiz lazim
 class _AdminProfiePageState extends State<AdminProfiePage> {
 
+  final ApiService apiService = ApiService();
   final storage = const FlutterSecureStorage();
+  late final User user;
+  late final UserDto profile;
+
+  @override
+  void initState() async{
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      initasync();
+    });
+
+
+  }
+
+  void initasync() async{
+    user = User.fromJson(jsonDecode(await storage.read(key: "user") as String));
+    var res = await apiService.getUser(user.ID) ;
+    profile = UserDto.fromJson(jsonDecode(res!.body));
+    print(profile.name);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +57,7 @@ class _AdminProfiePageState extends State<AdminProfiePage> {
                   IconButton(
                       onPressed: () {
                         storage.delete(key: "token");
+                        storage.delete(key: "user");
                         Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginPage()));
                       },
                       icon: Icon(
@@ -162,3 +187,4 @@ class _AdminProfiePageState extends State<AdminProfiePage> {
     );
   }
 }
+

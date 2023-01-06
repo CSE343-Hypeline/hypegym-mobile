@@ -16,7 +16,7 @@ class ApiService {
     return token;
   }
 
-  Future<Response?> getMyProfile() async {
+  Future<Response?> getMe() async {
     try{
       String token = await tokenOrEmpty;
       Map<String, String> requestHeaders = {
@@ -86,6 +86,27 @@ class ApiService {
       print(e.toString());
     }
     return null;
+  }
+
+  Future<Response?> getUser(int user_id) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      print(token.toString());
+      Response response = await get(
+        Uri.parse('${Constants.baseUrl}/api/user/$user_id'),
+        headers: requestHeaders,
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+
   }
 
   Future<List<UserDto>> fetchMembers(int gym_id) async {
@@ -167,7 +188,7 @@ class ApiService {
     };
 
     final response = await get(
-        Uri.parse('${Constants.baseUrl}/api/pt/${pt_id}/members)'),
+        Uri.parse('${Constants.baseUrl}/api/pt/${pt_id}/members'),
         headers: requestHeaders
     );
 
