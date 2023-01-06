@@ -67,6 +67,35 @@ class ApiService {
     return null;
   }
 
+  Future<Response?> editUser(int ID,String name, String email, String phoneNumber, String gender,String address, ) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      Map data = {
+        'name': name,
+        'email': email,
+        'phone_number': phoneNumber,
+        'address': address,
+        'gender': gender,
+      };
+      print(token.toString());
+      Response response = await put(
+          Uri.parse('${Constants.baseUrl}/api/user/$ID'),
+          headers: requestHeaders,
+          body: json.encode(data)
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
+  }
+
   Future<Response?> deleteUser(int user_id) async {
     try{
       String token = await tokenOrEmpty;

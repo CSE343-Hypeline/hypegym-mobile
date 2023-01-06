@@ -64,3 +64,52 @@ class UserDto {
     'gym_id': gymId,
   };
 }
+
+class UserEditDto {
+  final String name;
+  final String email;
+  final String phone_number;
+  final String gender;
+  final String adress;
+
+
+  const UserEditDto({
+    required this.name,
+    required this.email,
+    required this.phone_number,
+    required this.gender,
+    required this.adress,});
+
+  factory UserEditDto.fromJson(Map<String, dynamic> json) {
+    return UserEditDto(
+        name: json['name'],
+        email: json['email'],
+        phone_number: json['phone_number'],
+        gender: json['gender'],
+        adress: json['address']);
+  }
+
+  Map<String, dynamic> toJson() => {
+    'name': name,
+    'email': email,
+    'phone_number': phone_number,
+    'gender': gender,
+    'adress': adress,
+  };
+}
+
+class UserResDto {
+  final int ID;
+  final int trainerID;
+
+  const UserResDto({ required this.ID, required this.trainerID});
+
+  factory UserResDto.fromJson(Map<String, dynamic> json) {
+    return UserResDto( ID: json['UserID'], trainerID: json['TrainerID'],);
+  }
+
+  Map<String, dynamic> toJson() => {
+    'UserID': ID,
+    'TrainerID': trainerID
+  };
+}
