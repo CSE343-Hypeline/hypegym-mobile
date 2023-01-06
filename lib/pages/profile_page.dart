@@ -142,7 +142,7 @@ class _ProfiePageState extends State<ProfiePage> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            snapshot.data?.adress as String,
+                            snapshot.data?.address as String,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
