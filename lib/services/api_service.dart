@@ -295,6 +295,7 @@ class ApiService {
     }
     return null;
   }
+
   Future<Response?> checkIn(int id,int gym_id) async {
     try{
       String token = await tokenOrEmpty;
@@ -346,7 +347,7 @@ class ApiService {
       };
       print(token.toString());
       Map data = {
-        "exercise_id": exercise.id,
+        "exercise_id": exercise.exercise_id,
         "set": exercise.set,
         "repetition": exercise.rep
       };
@@ -376,9 +377,57 @@ class ApiService {
 
       print(token.toString());
       Response response = await post(
-          Uri.parse('${Constants.baseUrl}/api/member/assign-program/$member_id'),
+          Uri.parse('${Constants.baseUrl}/api/member/assign-programs/$member_id'),
           headers: requestHeaders,
           body: json.encode(exercises)
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
+  }
+
+  Future<List<ProgramDto>> getPrograms(int member_id) async {
+    String token = await tokenOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/member/programs/$member_id'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+
+      print(response.body.toString());
+      final List result = json.decode(response.body)['programs'];
+      return result.map((e) => ProgramDto.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<Response?> dismissProgram(int member_id,int program_id) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      Map data = {
+        'program_id': program_id,
+      };
+      print(token.toString());
+      Response response = await delete(
+          Uri.parse('${Constants.baseUrl}/api/member/dismiss-program/$member_id'),
+          headers: requestHeaders,
+          body: json.encode(data)
       );
       print(response.toString());
       return response;
@@ -429,5 +478,7 @@ class ApiService {
       throw Exception('Failed to load data');
     }
   }
+
+  
 
 }
