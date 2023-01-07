@@ -1,5 +1,5 @@
 //import 'dart:convert';
-
+/*
 class User {
   final String email;
   final String role;
@@ -15,13 +15,16 @@ class User {
   }
 
   Map<String, dynamic> toJson() => {
-    'email': email,
-    'role': role,
-    'id': ID,
-    'gym_id': gymId,
-    'exp': exp,
+    "ID": 1,
+    "name": "super",
+    "email": "superadmin@superadmin",
+    "phone_number": "11111111111",
+    "gender": "OTHER",
+    "address": "Gebze No: 1",
+    "gym_id": 1,
+    "role": "SUPERADMIN"
   };
-}
+}*/
 
 class UserDto {
   final int ID;

@@ -208,7 +208,7 @@ class _LoginPageState extends State<LoginPage> {
                             var resMe = await apiService.getMe();
                             switch (resMe!.statusCode) {
                               case 200:
-                                final User user = User.fromJson(jsonDecode(resMe.body));
+                                final UserDto user = UserDto.fromJson(jsonDecode(resMe.body));
                                 storage.write(key: "user", value: resMe.body);
                                 if(user.role == "SUPERADMIN"){
                                   Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const AdminGymPage()));

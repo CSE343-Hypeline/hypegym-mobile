@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:hypegym/helpers/constants.dart';
+import 'package:hypegym/models/exercise.dart';
+import 'package:hypegym/models/program.dart';
 import 'package:hypegym/models/user.dart';
 
 
@@ -16,8 +18,8 @@ class ApiService {
     return token;
   }
 
-  Future<User?> get userOrEmpty async {
-    var user = await User.fromJson(jsonDecode(await storage.read(key: "user") as String));
+  Future<UserDto?> get userOrEmpty async {
+    var user = await UserDto.fromJson(jsonDecode(await storage.read(key: "user") as String));
     if (user == null) return null;
     return user;
   }
@@ -332,6 +334,100 @@ class ApiService {
       print(e.toString());
     }
     return null;
+  }
+
+  Future<Response?> assignProgram(int member_id,Program exercise) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      print(token.toString());
+      Map data = {
+        "exercise_id": exercise.id,
+        "set": exercise.set,
+        "repetition": exercise.rep
+      };
+      print(token.toString());
+      Response response = await post(
+          Uri.parse('${Constants.baseUrl}/api/member/assign-program/$member_id'),
+          headers: requestHeaders,
+          body: json.encode(data)
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
+  }
+
+  Future<Response?> assignPrograms(int member_id,List<Program> exercises) async {
+    try{
+      String token = await tokenOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      print(token.toString());
+
+      print(token.toString());
+      Response response = await post(
+          Uri.parse('${Constants.baseUrl}/api/member/assign-program/$member_id'),
+          headers: requestHeaders,
+          body: json.encode(exercises)
+      );
+      print(response.toString());
+      return response;
+    }catch(e){
+      print(e.toString());
+    }
+    return null;
+  }
+
+  Future<List<ExerciseResDto>> getAllExercises() async {
+    String token = await tokenOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/exercises'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      final List result = json.decode(response.body);
+      return result.map((e) => ExerciseResDto.fromJson(e)).toList();
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<Exercise> getExercise(int exercise_id) async {
+    String token = await tokenOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/exercise/$exercise_id'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      var result = json.decode(response.body);
+      return Exercise.fromJson(result);
+    } else {
+      throw Exception('Failed to load data');
+    }
   }
 
 }

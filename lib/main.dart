@@ -19,7 +19,7 @@ Future<void> main() async {
   if(status != null){
       switch (resMe!.statusCode) {
         case 200:
-          final User user = User.fromJson(jsonDecode(resMe.body));
+          final UserDto user = UserDto.fromJson(jsonDecode(resMe.body));
           storage.write(key: "user", value: resMe.body);
           if(user.role == "SUPERADMIN"){
             runApp(const MyApp(2));

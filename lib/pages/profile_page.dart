@@ -17,12 +17,11 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   final ApiService apiService = ApiService();
   final storage = const FlutterSecureStorage();
-  late final User user;
+  late final UserDto user;
   late final UserDto profile;
 
   Future<UserDto> temp() async {
-    user = User.fromJson(jsonDecode(await storage.read(key: "user") as String));
-    var res = await apiService.getUser(user.ID) ;
+    var res = await apiService.getMe() ;
     profile = UserDto.fromJson(jsonDecode(res!.body));
     return profile;
   }

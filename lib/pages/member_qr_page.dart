@@ -182,7 +182,7 @@ class _MemberQrPageState extends State<MemberQrPage> {
   check_in_out(Barcode? res) async{
     var gym_id = int.parse(res!.code?.substring(8) as String);
     var token = await storage.read(key: "check-in-out");
-    var me = User.fromJson(jsonDecode(await storage.read(key: "user") as String));
+    var me = UserDto.fromJson(jsonDecode(await storage.read(key: "user") as String));
     if( (me.gymId == gym_id) && (token == 'check-in')){
       var res = await apiService.checkIn(me.ID, me.gymId);
       switch (res!.statusCode) {
