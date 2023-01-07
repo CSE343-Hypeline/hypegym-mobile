@@ -479,6 +479,97 @@ class ApiService {
     }
   }
 
-  
+  Future<List<int>> getOnlines() async {
+    String token = await tokenOrEmpty;
+    var user = await userOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/gym/${user!.gymId}/online'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      final List result = json.decode(response.body)['online_user_ids'];
+      return result.map((e) => int.parse(e)).toList();
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<List<int>> getDailyAttendance() async {
+    String token = await tokenOrEmpty;
+    var user = await userOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/gym/${user!.gymId}/attendance/day'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      List<int> attendance = [];
+      attendance.add(int.parse(json.decode(response.body)['attendance_count_female']));
+      attendance.add(int.parse(json.decode(response.body)['attendance_count_male']));
+      attendance.add(int.parse(json.decode(response.body)['attendance_count_other']));
+      return attendance;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<List<int>> getMonthlyAttendance() async {
+    String token = await tokenOrEmpty;
+    var user = await userOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/gym/${user!.gymId}/attendance/month'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      List<int> attendance = [];
+      attendance.add(int.parse(json.decode(response.body)['attendance_count_female']));
+      attendance.add(int.parse(json.decode(response.body)['attendance_count_male']));
+      attendance.add(int.parse(json.decode(response.body)['attendance_count_other']));
+      return attendance;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<Response> getTrainer(int member_id) async {
+    String token = await tokenOrEmpty;
+    var user = await userOrEmpty;
+    Map<String, String> requestHeaders = {
+      'Content-type': 'application/json',
+      'Accept': 'application/json',
+      'Cookie': 'Authorization=$token'
+    };
+    final response = await get(
+        Uri.parse('${Constants.baseUrl}/api/member/get-trainer-of/${member_id}'),
+        headers: requestHeaders
+    );
+
+    if (response.statusCode == 200) {
+      print(response.body.toString());
+      return response;
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
 
 }

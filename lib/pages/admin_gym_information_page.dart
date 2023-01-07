@@ -4,6 +4,8 @@ import 'package:google_fonts/google_fonts.dart';
 class AdminGymInformationPage extends StatelessWidget {
   const AdminGymInformationPage({Key? key}) : super(key: key);
 
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

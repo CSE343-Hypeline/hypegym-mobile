@@ -50,6 +50,7 @@ class _MemberQrPageState extends State<MemberQrPage> {
                   if (result != null)
                     Text(
                         'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
+
                   else
                     const Text('Scan a code'),
                   Row(
@@ -180,9 +181,13 @@ class _MemberQrPageState extends State<MemberQrPage> {
   }
 
   check_in_out(Barcode? res) async{
-    var gym_id = int.parse(res!.code?.substring(8) as String);
+    await controller?.pauseCamera();
+    print("qr code ");
+    print(res!.code?.substring(7));
+    var gym_id = int.parse(res!.code?.substring(7) as String);
     var token = await storage.read(key: "check-in-out");
     var me = UserDto.fromJson(jsonDecode(await storage.read(key: "user") as String));
+
     if( (me.gymId == gym_id) && (token == 'check-in')){
       var res = await apiService.checkIn(me.ID, me.gymId);
       switch (res!.statusCode) {
@@ -206,7 +211,36 @@ class _MemberQrPageState extends State<MemberQrPage> {
               ),
             ],
           );
+        case 400:
+          var res = await apiService.checkOut(me.ID, me.gymId);
+          switch (res!.statusCode) {
+            case 200:
+              storage.write(key: "check-in-out", value: 'check-in');
+              return AlertDialog(
+                title: const Text('Successful'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: const <Widget>[
+                      Text('You are checked out'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
 
+            default:
+
+              break;
+          }
+
+          break;
         default:
 
           break;
@@ -235,7 +269,36 @@ class _MemberQrPageState extends State<MemberQrPage> {
               ),
             ],
           );
+        case 400:
+          var res = await apiService.checkIn(me.ID, me.gymId);
+          switch (res!.statusCode) {
+            case 200:
+              storage.write(key: "check-in-out", value: 'check-out');
+              return AlertDialog(
+                title: const Text('Successful'),
+                content: SingleChildScrollView(
+                  child: ListBody(
+                    children: const <Widget>[
+                      Text('You are checked in'),
+                    ],
+                  ),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('OK'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
 
+            default:
+
+              break;
+          }
+
+          break;
 
         default:
           print('check out failed');

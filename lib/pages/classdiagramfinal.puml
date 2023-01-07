@@ -1,0 +1,525 @@
+@startuml
+set namespaceSeparator ::
+
+class "hypegym::helpers::constants.dart::Constants" {
+  {static} +String baseUrl
+}
+
+class "hypegym::main.dart::MyApp" {
+  +int direct
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "hypegym::main.dart::MyApp"
+
+class "hypegym::models::exercise.dart::Exercise" {
+  +int id
+  +String name
+  +String level
+  +String equipment
+  +List<String> instructions
+  +Map<String, dynamic> toJson()
+}
+
+class "hypegym::models::exercise.dart::ExerciseResDto" {
+  +int id
+  +String name
+  +Map<String, dynamic> toJson()
+}
+
+class "hypegym::models::program.dart::Program" {
+  +int exercise_id
+  +int set
+  +int rep
+  +Map<String, dynamic> toJson()
+}
+
+class "hypegym::models::program.dart::ProgramDto" {
+  +int id
+  +int exercise_id
+  +int set
+  +int rep
+  +Map<String, dynamic> toJson()
+}
+
+class "hypegym::models::user.dart::UserDto" {
+  +int ID
+  +String name
+  +String email
+  +String phone_number
+  +String gender
+  +String address
+  +String role
+  +int gymId
+  +Map<String, dynamic> toJson()
+}
+
+class "hypegym::models::user.dart::UserEditDto" {
+  +String name
+  +String email
+  +String phone_number
+  +String gender
+  +String address
+  +Map<String, dynamic> toJson()
+}
+
+class "hypegym::models::user.dart::UserResDto" {
+  +int ID
+  +int trainerID
+  +Map<String, dynamic> toJson()
+}
+
+class "hypegym::pages::about_us_page.dart::AboutUsPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "hypegym::pages::about_us_page.dart::AboutUsPage"
+
+class "hypegym::pages::admin_gym_information_page.dart::AdminGymInformationPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "hypegym::pages::admin_gym_information_page.dart::AdminGymInformationPage"
+
+class "hypegym::pages::admin_gym_page.dart::AdminGymPage" {
+  +State<AdminGymPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::admin_gym_page.dart::AdminGymPage"
+
+class "hypegym::pages::admin_gym_page.dart::_AdminGymPageState" {
+  +int selectedIndex
+  {static} -List<Widget> _widgetOptions
+  -void _onItemTapped()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::admin_gym_page.dart::_AdminGymPageState"
+
+class "hypegym::pages::admin_list_member_page.dart::AdminListMemberPage" {
+  +UserDto user
+  +State<AdminListMemberPage> createState()
+}
+
+"hypegym::pages::admin_list_member_page.dart::AdminListMemberPage" o-- "hypegym::models::user.dart::UserDto"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::admin_list_member_page.dart::AdminListMemberPage"
+
+class "hypegym::pages::admin_list_member_page.dart::_AdminListMemberPageState" {
+  +ApiService apiService
+  +Widget build()
+}
+
+"hypegym::pages::admin_list_member_page.dart::_AdminListMemberPageState" o-- "hypegym::services::api_service.dart::ApiService"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::admin_list_member_page.dart::_AdminListMemberPageState"
+
+class "hypegym::pages::admin_member_page.dart::AdminMemberPage" {
+  +State<AdminMemberPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::admin_member_page.dart::AdminMemberPage"
+
+class "hypegym::pages::admin_member_page.dart::_AdminMemberPageState" {
+  +ApiService apiService
+  +Widget build()
+}
+
+"hypegym::pages::admin_member_page.dart::_AdminMemberPageState" o-- "hypegym::services::api_service.dart::ApiService"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::admin_member_page.dart::_AdminMemberPageState"
+
+class "hypegym::pages::admin_member_profile_page.dart::AdminMemberProfilePage" {
+  +UserDto user
+  +State<AdminMemberProfilePage> createState()
+}
+
+"hypegym::pages::admin_member_profile_page.dart::AdminMemberProfilePage" o-- "hypegym::models::user.dart::UserDto"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::admin_member_profile_page.dart::AdminMemberProfilePage"
+
+class "hypegym::pages::admin_member_profile_page.dart::_AdminMemberProfilePageState" {
+  +ApiService apiService
+  +Widget build()
+}
+
+"hypegym::pages::admin_member_profile_page.dart::_AdminMemberProfilePageState" o-- "hypegym::services::api_service.dart::ApiService"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::admin_member_profile_page.dart::_AdminMemberProfilePageState"
+
+class "hypegym::pages::admin_pt_assign_page.dart::AdminPTAssignPage" {
+  +UserDto user
+  +State<AdminPTAssignPage> createState()
+}
+
+"hypegym::pages::admin_pt_assign_page.dart::AdminPTAssignPage" o-- "hypegym::models::user.dart::UserDto"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::admin_pt_assign_page.dart::AdminPTAssignPage"
+
+class "hypegym::pages::admin_pt_assign_page.dart::_AdminPTAssignPageState" {
+  +ApiService apiService
+  +Widget build()
+}
+
+"hypegym::pages::admin_pt_assign_page.dart::_AdminPTAssignPageState" o-- "hypegym::services::api_service.dart::ApiService"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::admin_pt_assign_page.dart::_AdminPTAssignPageState"
+
+class "hypegym::pages::admin_trainer_page.dart::AdminTrainerPage" {
+  +State<AdminTrainerPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::admin_trainer_page.dart::AdminTrainerPage"
+
+class "hypegym::pages::admin_trainer_page.dart::_AdminTrainerPageState" {
+  +ApiService apiService
+  +Widget build()
+}
+
+"hypegym::pages::admin_trainer_page.dart::_AdminTrainerPageState" o-- "hypegym::services::api_service.dart::ApiService"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::admin_trainer_page.dart::_AdminTrainerPageState"
+
+class "hypegym::pages::admin_trainer_profile_page.dart::AdminTrainerProfilePage" {
+  +UserDto user
+  +State<AdminTrainerProfilePage> createState()
+}
+
+"hypegym::pages::admin_trainer_profile_page.dart::AdminTrainerProfilePage" o-- "hypegym::models::user.dart::UserDto"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::admin_trainer_profile_page.dart::AdminTrainerProfilePage"
+
+class "hypegym::pages::admin_trainer_profile_page.dart::_AdminTrainerProfilePageState" {
+  +ApiService apiService
+  +Widget build()
+}
+
+"hypegym::pages::admin_trainer_profile_page.dart::_AdminTrainerProfilePageState" o-- "hypegym::services::api_service.dart::ApiService"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::admin_trainer_profile_page.dart::_AdminTrainerProfilePageState"
+
+class "hypegym::pages::edit_profile_page.dart::EditProfilePage" {
+  +UserDto? user
+  +State<EditProfilePage> createState()
+}
+
+"hypegym::pages::edit_profile_page.dart::EditProfilePage" o-- "hypegym::models::user.dart::UserDto"
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::edit_profile_page.dart::EditProfilePage"
+
+class "hypegym::pages::edit_profile_page.dart::_EditProfilePageState" {
+  +ApiService apiService
+  -GlobalKey<FormState> _formKey
+  -TextEditingController _nameController
+  -TextEditingController _emailController
+  -TextEditingController _phoneNumberController
+  -TextEditingController _addressController
+  +int? tID
+  +String? tGender
+  +String? tName
+  +String? tEmail
+  +String? tPhone
+  +String? tAddress
+  +Widget build()
+}
+
+"hypegym::pages::edit_profile_page.dart::_EditProfilePageState" o-- "hypegym::services::api_service.dart::ApiService"
+"hypegym::pages::edit_profile_page.dart::_EditProfilePageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"hypegym::pages::edit_profile_page.dart::_EditProfilePageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::edit_profile_page.dart::_EditProfilePageState"
+
+class "hypegym::pages::login_page.dart::LoginPage" {
+  +State<LoginPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::login_page.dart::LoginPage"
+
+class "hypegym::pages::login_page.dart::_LoginPageState" {
+  -GlobalKey<FormState> _formKey
+  +AuthService authService
+  +ApiService apiService
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  +FlutterSecureStorage storage
+  +bool passwordVisible
+  +Widget build()
+}
+
+"hypegym::pages::login_page.dart::_LoginPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"hypegym::pages::login_page.dart::_LoginPageState" o-- "hypegym::services::auth_service.dart::AuthService"
+"hypegym::pages::login_page.dart::_LoginPageState" o-- "hypegym::services::api_service.dart::ApiService"
+"hypegym::pages::login_page.dart::_LoginPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"hypegym::pages::login_page.dart::_LoginPageState" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::login_page.dart::_LoginPageState"
+
+class "hypegym::pages::member_gym_page.dart::MemberGymPage" {
+  +State<MemberGymPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::member_gym_page.dart::MemberGymPage"
+
+class "hypegym::pages::member_gym_page.dart::_MemberGymPageState" {
+  +int selectedIndex
+  {static} -List<Widget> _widgetOptions
+  -void _onItemTapped()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::member_gym_page.dart::_MemberGymPageState"
+
+class "hypegym::pages::member_measurement_page.dart::MemberMeasurementPage" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "hypegym::pages::member_measurement_page.dart::MemberMeasurementPage"
+
+class "hypegym::pages::member_program_page.dart::MemberProgramPage" {
+  +State<MemberProgramPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::member_program_page.dart::MemberProgramPage"
+
+class "hypegym::pages::member_program_page.dart::_MemberProgramPageState" {
+  +List<dynamic> programList
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::member_program_page.dart::_MemberProgramPageState"
+
+class "hypegym::pages::member_qr_page.dart::MemberQrPage" {
+  +State<MemberQrPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::member_qr_page.dart::MemberQrPage"
+
+class "hypegym::pages::member_qr_page.dart::_MemberQrPageState" {
+  +ApiService apiService
+  +FlutterSecureStorage storage
+  +Barcode? result
+  +QRViewController? controller
+  +GlobalKey<State<StatefulWidget>> qrKey
+  +void reassemble()
+  +Widget build()
+  -Widget _buildQrView()
+  -void _onQRViewCreated()
+  -void _onPermissionSet()
+  +void dispose()
+  +dynamic check_in_out()
+}
+
+"hypegym::pages::member_qr_page.dart::_MemberQrPageState" o-- "hypegym::services::api_service.dart::ApiService"
+"hypegym::pages::member_qr_page.dart::_MemberQrPageState" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+"hypegym::pages::member_qr_page.dart::_MemberQrPageState" o-- "qr_code_scanner::src::types::barcode.dart::Barcode"
+"hypegym::pages::member_qr_page.dart::_MemberQrPageState" o-- "qr_code_scanner::src::qr_code_scanner.dart::QRViewController"
+"hypegym::pages::member_qr_page.dart::_MemberQrPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<State<StatefulWidget>>"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::member_qr_page.dart::_MemberQrPageState"
+
+class "hypegym::pages::profile_page.dart::ProfilePage" {
+  +State<ProfilePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::profile_page.dart::ProfilePage"
+
+class "hypegym::pages::profile_page.dart::_ProfilePageState" {
+  +ApiService apiService
+  +FlutterSecureStorage storage
+  +UserDto user
+  +UserDto profile
+  +Future<UserDto> temp()
+  +Widget build()
+}
+
+"hypegym::pages::profile_page.dart::_ProfilePageState" o-- "hypegym::services::api_service.dart::ApiService"
+"hypegym::pages::profile_page.dart::_ProfilePageState" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+"hypegym::pages::profile_page.dart::_ProfilePageState" o-- "hypegym::models::user.dart::UserDto"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::profile_page.dart::_ProfilePageState"
+
+class "hypegym::pages::temp.dart::TempPage" {
+  +State<TempPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::temp.dart::TempPage"
+
+class "hypegym::pages::temp.dart::_TempPageState" {
+  +Map<String, String> measurementMap
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::temp.dart::_TempPageState"
+
+class "hypegym::pages::temp_edit.dart::TempEdit" {
+  +Map<dynamic, dynamic> memberMeasurement
+  +State<TempEdit> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::temp_edit.dart::TempEdit"
+
+class "hypegym::pages::temp_edit.dart::_TempEditState" {
+  +TextInputType keyboardType
+  +Widget build()
+}
+
+"hypegym::pages::temp_edit.dart::_TempEditState" o-- "flutter::src::services::text_input.dart::TextInputType"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::temp_edit.dart::_TempEditState"
+
+class "hypegym::pages::trainer_gym_page.dart::TrainerGymPage" {
+  +State<TrainerGymPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::trainer_gym_page.dart::TrainerGymPage"
+
+class "hypegym::pages::trainer_gym_page.dart::_TrainerGymPageState" {
+  +int selectedIndex
+  {static} -List<Widget> _widgetOptions
+  -void _onItemTapped()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::trainer_gym_page.dart::_TrainerGymPageState"
+
+class "hypegym::pages::trainer_member_measurement_edit_page.dart::MeasurementEditPage" {
+  +Map<dynamic, dynamic> memberMeasurement
+  +State<MeasurementEditPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::trainer_member_measurement_edit_page.dart::MeasurementEditPage"
+
+class "hypegym::pages::trainer_member_measurement_edit_page.dart::_MeasurementEditPageState" {
+  +TextInputType keyboardType
+  +Widget build()
+}
+
+"hypegym::pages::trainer_member_measurement_edit_page.dart::_MeasurementEditPageState" o-- "flutter::src::services::text_input.dart::TextInputType"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::trainer_member_measurement_edit_page.dart::_MeasurementEditPageState"
+
+class "hypegym::pages::trainer_member_measurement_page.dart::TrainerMemberMeasurementPage" {
+  +State<TrainerMemberMeasurementPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::trainer_member_measurement_page.dart::TrainerMemberMeasurementPage"
+
+class "hypegym::pages::trainer_member_measurement_page.dart::_TrainerMemberMeasurementPageState" {
+  +Map<String, String> measurementMap
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::trainer_member_measurement_page.dart::_TrainerMemberMeasurementPageState"
+
+class "hypegym::pages::trainer_member_page.dart::TrainerMemberPage" {
+  +State<TrainerMemberPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::trainer_member_page.dart::TrainerMemberPage"
+
+class "hypegym::pages::trainer_member_page.dart::_TrainerMemberPageState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::trainer_member_page.dart::_TrainerMemberPageState"
+
+class "hypegym::pages::trainer_member_program_add_page.dart::TrainerMemberProgramAddPage" {
+  +List<dynamic> programList
+  +List<dynamic> memberProgramList
+  +State<TrainerMemberProgramAddPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::trainer_member_program_add_page.dart::TrainerMemberProgramAddPage"
+
+class "hypegym::pages::trainer_member_program_add_page.dart::_TrainerMemberProgramAddPageState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::trainer_member_program_add_page.dart::_TrainerMemberProgramAddPageState"
+
+class "hypegym::pages::trainer_member_program_edit_page.dart::TrainerMemberProgramEditPage" {
+  +List<dynamic> memberProgramList
+  +State<TrainerMemberProgramEditPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::trainer_member_program_edit_page.dart::TrainerMemberProgramEditPage"
+
+class "hypegym::pages::trainer_member_program_edit_page.dart::_TrainerMemberProgramEditPageState" {
+  +List<dynamic> programList
+  +void initState()
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::trainer_member_program_edit_page.dart::_TrainerMemberProgramEditPageState"
+
+class "hypegym::pages::trainer_member_program_page.dart::TrainerMemberProgramPage" {
+  +State<TrainerMemberProgramPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::trainer_member_program_page.dart::TrainerMemberProgramPage"
+
+class "hypegym::pages::trainer_member_program_page.dart::_TrainerMemberProgramPageState" {
+  +List<dynamic> programList
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::trainer_member_program_page.dart::_TrainerMemberProgramPageState"
+
+class "hypegym::pages::user_add_page.dart::UserAddPage" {
+  +int tempNumber
+  +State<UserAddPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::user_add_page.dart::UserAddPage"
+
+class "hypegym::pages::user_add_page.dart::_UserAddPageState" {
+  -GlobalKey<FormState> _formKey
+  +ApiService apiService
+  -TextEditingController _nameController
+  -TextEditingController _emailController
+  -TextEditingController _passwordController
+  -TextEditingController _phoneNumberController
+  -TextEditingController _addressController
+  +String gender
+  +String dropdownValue
+  +Widget build()
+}
+
+"hypegym::pages::user_add_page.dart::_UserAddPageState" o-- "flutter::src::widgets::framework.dart::GlobalKey<FormState>"
+"hypegym::pages::user_add_page.dart::_UserAddPageState" o-- "hypegym::services::api_service.dart::ApiService"
+"hypegym::pages::user_add_page.dart::_UserAddPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::user_add_page.dart::_UserAddPageState"
+
+class "hypegym::pages::welcome_page.dart::WelcomePage" {
+  +State<WelcomePage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "hypegym::pages::welcome_page.dart::WelcomePage"
+
+class "hypegym::pages::welcome_page.dart::_WelcomePageState" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::State" <|-- "hypegym::pages::welcome_page.dart::_WelcomePageState"
+
+class "hypegym::services::api_service.dart::ApiService" {
+  +FlutterSecureStorage storage
+  +Future<String> tokenOrEmpty
+  +Future<UserDto?> userOrEmpty
+  +Future<Response?> getMe()
+  +Future<Response?> addUser()
+  +Future<Response?> editUser()
+  +Future<Response?> deleteUser()
+  +Future<Response?> getUser()
+  +Future<List<UserDto>> fetchMembers()
+  +Future<List<UserDto>> fetchTrainers()
+  +Future<List<UserDto>> getTrainers()
+  +Future<Response?> assignPT()
+  +Future<List<UserDto>> getMembers()
+  +Future<Response?> dismissMember()
+  +Future<Response?> checkIn()
+  +Future<Response?> checkOut()
+  +Future<Response?> assignProgram()
+  +Future<Response?> assignPrograms()
+  +Future<List<ProgramDto>> getPrograms()
+  +Future<Response?> dismissProgram()
+  +Future<List<ExerciseResDto>> getAllExercises()
+  +Future<Exercise> getExercise()
+  +Future<List<int>> getOnlines()
+  +Future<List<int>> getDailyAttendance()
+  +Future<List<int>> getMonthlyAttendance()
+  +Future<Response> getTrainer()
+}
+
+"hypegym::services::api_service.dart::ApiService" o-- "flutter_secure_storage::flutter_secure_storage.dart::FlutterSecureStorage"
+
+class "hypegym::services::auth_service.dart::AuthService" {
+  +Uri loginUri
+  +Future<Response?> login()
+}
+
+
+@enduml

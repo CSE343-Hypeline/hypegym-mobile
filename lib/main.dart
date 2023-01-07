@@ -16,6 +16,8 @@ Future<void> main() async {
   const storage = FlutterSecureStorage();
   var status = await storage.read(key: 'token');
   var resMe = await apiService.getMe();
+
+
   if(status != null){
       switch (resMe!.statusCode) {
         case 200:
