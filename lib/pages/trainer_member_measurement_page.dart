@@ -20,84 +20,40 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
         decoration: BoxDecoration(
           color: Colors.grey.shade900,
         ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0, bottom: 5.0,),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "MEASUREMENTS",
-                    style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.greenAccent.shade400,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                  itemCount: measurementMap.length,
-                  itemBuilder: (context, i) {
-                    return Padding(
-                      padding: const EdgeInsets.all(2.0),
-                      child: ListTile(
-                        title: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0, right: 10.0,),
-                              child: SizedBox(
-                                height: 35.0,
-                                width: 130.0,
-                                child: Card(
-                                  color: Colors.black38,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: Text(
-                                      measurementMap.keys.elementAt(i),
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20.0, right: 10.0,),
-                              child: SizedBox(
-                                height: 35.0,
-                                width: 70.0,
-                                child: Card(
-                                  color: Colors.white70,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(3.0),
-                                    child: Text(
-                                      measurementMap.values.elementAt(i),
-                                      style: const TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 60.0, bottom: 20.0,),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "MEASUREMENTS",
+                      style: TextStyle(
+                        fontSize: 40,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.greenAccent.shade400,
                       ),
-                    );
-                  }
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+              DataTable(
+                //headingRowColor: MaterialStateProperty.all(Colors.greenAccent.shade400),
+                columns: [
+                  DataColumn(label: Text('Field', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),
+                  DataColumn(label: Text('Data', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),
+                ],
+                rows: measurementMap.entries
+                    .map((e) => DataRow(cells: [
+                  DataCell(Text(e.key.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                  DataCell(Text(e.value.toString(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold),)),
+                ]))
+                    .toList(),
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: FloatingActionButton(

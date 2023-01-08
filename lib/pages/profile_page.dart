@@ -87,7 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            snapshot.data?.name as String,
+                            snapshot.data!.name,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -105,7 +105,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            snapshot.data?.email as String,
+                            snapshot.data!.email,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -123,7 +123,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            snapshot.data?.phone_number as String,
+                            snapshot.data!.phone_number,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -141,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            snapshot.data?.address as String,
+                            snapshot.data!.address,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -159,7 +159,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           const SizedBox(height: 4),
                           Text(
-                            snapshot.data?.gender as String,
+                            snapshot.data!.gender,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
