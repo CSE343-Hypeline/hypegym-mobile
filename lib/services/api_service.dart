@@ -552,24 +552,24 @@ class ApiService {
   }
 
   Future<Response> getTrainer(int member_id) async {
-    String token = await tokenOrEmpty;
-    var user = await userOrEmpty;
-    Map<String, String> requestHeaders = {
-      'Content-type': 'application/json',
-      'Accept': 'application/json',
-      'Cookie': 'Authorization=$token'
-    };
-    final response = await get(
-        Uri.parse('${Constants.baseUrl}/api/member/get-trainer-of/${member_id}'),
-        headers: requestHeaders
-    );
+      String token = await tokenOrEmpty;
+      var user = await userOrEmpty;
+      Map<String, String> requestHeaders = {
+        'Content-type': 'application/json',
+        'Accept': 'application/json',
+        'Cookie': 'Authorization=$token'
+      };
+      final response = await get(
+          Uri.parse('${Constants.baseUrl}/api/member/get-trainer-of/${member_id}'),
+          headers: requestHeaders
+      );
 
-    if (response.statusCode == 200) {
-      print(response.body.toString());
-      return response;
-    } else {
-      throw Exception('Failed to load data');
+      if (response.statusCode == 200) {
+        print(response.body.toString());
+        return response;
+      } else {
+        throw Exception('Failed to load data');
+      }
     }
-  }
 
 }
