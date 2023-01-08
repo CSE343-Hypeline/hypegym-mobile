@@ -42,7 +42,7 @@ class _MemberGymPageState extends State<MemberGymPage> {
               Icons.qr_code_2_outlined,
               color: Colors.greenAccent.shade400,
             ),
-            label: 'Exercises',
+            label: 'QR Code',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
@@ -50,7 +50,7 @@ class _MemberGymPageState extends State<MemberGymPage> {
               Icons.fitness_center_outlined,
               color: Colors.greenAccent.shade400,
             ),
-            label: 'QR Code',
+            label: 'Exercises',
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(

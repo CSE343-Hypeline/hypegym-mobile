@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hypegym/pages/trainer_member_measurement_page.dart';
 
 class MeasurementEditPage extends StatefulWidget {
   const MeasurementEditPage(this.memberMeasurement, {super.key});
-  final Map memberMeasurement;
+  final Map<String,String> memberMeasurement;
   @override
   State<MeasurementEditPage> createState() => _MeasurementEditPageState();
 }
@@ -63,6 +64,20 @@ class _MeasurementEditPageState extends State<MeasurementEditPage> {
                   ),
                 ]))
                     .toList(),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => TrainerMemberMeasurementPage(widget.memberMeasurement)));
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.greenAccent.shade400,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5)
+                  ),
+                  minimumSize: const Size(150, 50),
+                  maximumSize: const Size(150, 50),
+                ),
+                child: const Text("Edit"),
               ),
             ],
           ),

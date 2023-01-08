@@ -56,7 +56,7 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
               child: FutureBuilder<List<ProgramDto>>(
                 future: apiService.getPrograms(widget.user.ID),
                 builder: (context, snapshot) {
-                  if (snapshot.hasData) {
+                  if (snapshot.data!.isNotEmpty) {
                     programList = snapshot.data!;
                     return ListView.separated(
                         separatorBuilder: (context, index) => const Divider(color: Colors.white,),
@@ -89,8 +89,7 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
                           );
                         }
                     );
-                  } else if (snapshot.hasData == false){
-                    //burda add sayfasina yonlendircek
+                  } else {
                     Navigator.push(context, MaterialPageRoute(builder: (context) => TrainerMemberProgramAddPage(widget.user)));
                   }
                   return const CircularProgressIndicator();

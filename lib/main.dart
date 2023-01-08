@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:dcdg/dcdg.dart';
+//import 'package:dcdg/dcdg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hypegym/models/user.dart';
@@ -15,10 +15,9 @@ Future<void> main() async {
   final ApiService apiService = ApiService();
   const storage = FlutterSecureStorage();
   var status = await storage.read(key: 'token');
-  var resMe = await apiService.getMe();
-
 
   if(status != null){
+      var resMe = await apiService.getMe();
       switch (resMe!.statusCode) {
         case 200:
           final UserDto user = UserDto.fromJson(jsonDecode(resMe.body));
@@ -68,5 +67,5 @@ directpage(int direct){
     case 3:  return const TrainerGymPage();
     case 4:  return const MemberGymPage();
     default: return const WelcomePage();
-  };
+  }
 }

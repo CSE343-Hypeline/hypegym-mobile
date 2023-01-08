@@ -93,7 +93,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    "+90 ${widget.user.phone_number}",
+                    widget.user.phone_number,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
