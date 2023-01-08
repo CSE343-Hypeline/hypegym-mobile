@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MeasurementEditPage extends StatefulWidget {
   const MeasurementEditPage(this.memberMeasurement, {super.key});
@@ -27,7 +28,7 @@ class _MeasurementEditPageState extends State<MeasurementEditPage> {
                     Text(
                       "MEASUREMENTS",
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 40,
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent.shade400,
                       ),
