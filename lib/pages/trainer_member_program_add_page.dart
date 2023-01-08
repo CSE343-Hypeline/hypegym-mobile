@@ -123,15 +123,15 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                   IconButton(
                                       style: IconButton.styleFrom(backgroundColor: Colors.grey.shade900,),
                                       icon: Icon(Icons.add_circle, color: Colors.greenAccent.shade400,),
-                                      onPressed: () {
+                                      onPressed: () async {
                                         Program mProgram = Program(
                                             exercise_id: snapshot.data![i].id,
                                             set: int.parse(tSet),
                                             rep: int.parse(tRep));
-                                        var res = apiService.assignProgram(widget.user.ID, mProgram) as Response;
-                                        if (res.statusCode == 200) {
+                                        var res = await apiService.assignProgram(widget.user.ID, mProgram);
+                                        if (res!.statusCode == 200) {
                                           print("eklendi");
-                                        } else if(res.statusCode == 401) {
+                                        } else {
                                           print("eklenemedi");
                                         }
                                         setState(() {

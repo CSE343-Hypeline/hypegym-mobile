@@ -76,15 +76,15 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
                                   backgroundColor: Colors.grey.shade900,
                                 ),
                                 child: const Icon(Icons.cancel_outlined, color: Colors.red,),
-                                onPressed: () {   //bu kisim emin degilim eraya sor
-                                  var res = apiService.dismissProgram(widget.user.ID,widget.programList[i].id ) as Response;
-                                  if(res.statusCode == 200){
+                                onPressed: () async{   //bu kisim emin degilim eraya sor
+                                  var res = await apiService.dismissProgram(widget.user.ID,widget.programList[i].id );
+                                  if(res!.statusCode == 200){
                                     print("silindi");
                                     widget.programList.removeAt(i);
                                     setState(() {
                                       //refresh UI after deleting element from list
                                     });
-                                  } else if(res.statusCode == 401) {
+                                  } else {
                                     print("silinemedi");
                                   }
                                 }
