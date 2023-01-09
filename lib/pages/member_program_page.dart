@@ -71,7 +71,7 @@ class _MemberProgramPageState extends State<MemberProgramPage> {
             ),
             Expanded(
               child: FutureBuilder<List<ProgramDto>> (
-                      future: profile == null ? null : apiService.getPrograms(profile!.ID),
+                      future: profile == null ? null : apiService.fetchPrograms(profile!.ID),
                       builder: (context, mProgram) {
                         if(mProgram.hasData && mProgram.data!.isNotEmpty) {
                           return ListView.separated(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:http/http.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/exercise.dart';
@@ -14,8 +15,8 @@ class TrainerMemberProgramAddPage extends StatefulWidget {
 
 class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPage> {
 
-  late String tSet;
-  late String tRep;
+  List<String>? tSet = List.filled(10,"");
+  List<String>? tRep = List.filled(10,"");
 
   final ApiService apiService = ApiService();
   //late final Program mProgram;
@@ -71,8 +72,11 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                     child: TextFormField(
                                       style: const TextStyle(color: Colors.white),
                                       controller: TextEditingController(),
-                                      onFieldSubmitted: (value){
-                                        tSet = value;
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                      ],
+                                      onChanged: (value){
+                                        tSet![i] = value;
                                       },
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
@@ -103,8 +107,11 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                     child: TextFormField(
                                       style: const TextStyle(color: Colors.white),
                                       controller: TextEditingController(),
-                                      onFieldSubmitted: (value){
-                                        tRep = value;
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                                      ],
+                                      onChanged: (value){
+                                        tRep![i] = value;
                                       },
                                       decoration: InputDecoration(
                                         focusedBorder: OutlineInputBorder(
@@ -124,10 +131,13 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                       style: IconButton.styleFrom(backgroundColor: Colors.grey.shade900,),
                                       icon: Icon(Icons.add_circle, color: Colors.greenAccent.shade400,),
                                       onPressed: () async {
+                                        print(tSet);
+                                        if(tSet![i].isEmpty || tRep![i].isEmpty)
+                                            return;
                                         Program mProgram = Program(
                                             exercise_id: snapshot.data![i].id,
-                                            set: int.parse(tSet),
-                                            rep: int.parse(tRep));
+                                            set: int.parse(tSet![i]),
+                                            rep: int.parse(tRep![i]));
                                         var res = await apiService.assignProgram(widget.user.ID, mProgram);
                                         if (res!.statusCode == 200) {
                                           print("eklendi");
@@ -144,7 +154,7 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
 
                               title: Text(snapshot.data![i].name),
                               textColor: Colors.white,
-                              //onTap: () => ,
+                              //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(snapshot.data!.))),
                             ),
                           );
                         }

@@ -16,17 +16,21 @@ class TrainerMemberPage extends StatefulWidget {
 class _TrainerMemberPageState extends State<TrainerMemberPage> {
 
   final ApiService apiService = ApiService();
-  late final UserDto profile;
+  UserDto? profile;
   Map<String, String> measurementMap = {'Kilogram': '80kg', 'Height': '165cm',
     'Wrist': '20cm', 'Chest': '20cm', 'Waist': '20cm', 'Hip': '20cm', 'Arm': '20cm',
     'Forearm': '20cm', 'Leg': '20cm', 'Calf': '20cm', 'Neck': '20cm'};
 
-  Future<UserDto> temp() async {
-    var res = await apiService.getMe() ;
-    profile = UserDto.fromJson(jsonDecode(res!.body));
-    return profile;
+  @override
+  void initState () {
+    super.initState();
+    _asyncMethod();
   }
 
+  _asyncMethod() async{
+    profile = (await apiService.userOrEmpty)!;
+    setState((){});
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,29 +57,13 @@ class _TrainerMemberPageState extends State<TrainerMemberPage> {
               ),
             ),
             //bu kalkcak
-            ElevatedButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => TrainerMemberMeasurementPage(measurementMap)));
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.greenAccent.shade400,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5)
-                ),
-                minimumSize: const Size(150, 50),
-                maximumSize: const Size(150, 50),
-              ),
-              child: const Text("Edit"),
-            ),
+
             Expanded(
-              child: FutureBuilder(
-                future: temp(),
-                  builder: (context,snapshot) {
-                    if (snapshot.hasData) {
-                      return FutureBuilder<List<UserDto>>(
-                        future: apiService.getMembers(snapshot.data!.ID),
+              child:
+              FutureBuilder<List<UserDto>>(
+                        future: profile == null ? null : apiService.getMembers(profile!.ID),
                         builder: (context, tMembers) {
-                          if (tMembers.data!.isNotEmpty) {
+                          if (tMembers.hasData && tMembers.data!.isNotEmpty) {
                             return ListView.builder(
                               shrinkWrap: true,
                               itemCount: tMembers.data!.length,
@@ -104,7 +92,7 @@ class _TrainerMemberPageState extends State<TrainerMemberPage> {
                                 );
                               },
                             );
-                          } else {
+                          } else if(tMembers.hasData && tMembers.data!.isEmpty) {
                             return const Padding(
                               padding: EdgeInsets.only(top: 100.0, left: 20.0, right: 20.0),
                               child: Text(
@@ -112,15 +100,10 @@ class _TrainerMemberPageState extends State<TrainerMemberPage> {
                               ),
                             );
                           }
-                          //return const CircularProgressIndicator();
+                          return const CircularProgressIndicator();
                         },
-                      );
-                    }else if (snapshot.hasError) {
-                      return Text('${snapshot.error}');
-                    }
-                    return const CircularProgressIndicator();
-                  }
-              ),
+                      ),
+
             ),
           ],
         ),

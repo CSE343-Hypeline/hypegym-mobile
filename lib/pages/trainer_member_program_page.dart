@@ -20,11 +20,16 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
   final ApiService apiService = ApiService();
   late final Exercise exer;
 
-  Future<Exercise> getMemberExercise(int exer_id) async {
-    exer = await apiService.getExercise(exer_id);
+  Future<List<ProgramListDto>> getMemberExercise(int exer_id) async {
+    var exer = (await apiService.getPrograms(exer_id));
     return exer;
   }
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    print(getMemberExercise(widget.user.ID));
+  }
   late final List<ProgramDto> programList;
   //final List programList = ['Warn Up', 'Jumping Jack', 'Skipping', 'Squats', 'Arm Raises', 'Incline Push-Ups', 'Push-Ups'];
   @override
@@ -53,45 +58,48 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
               ),
             ),
             Expanded(
-              child: FutureBuilder<List<ProgramDto>>(
+              child: FutureBuilder<List<ProgramListDto>>(
                 future: apiService.getPrograms(widget.user.ID),
                 builder: (context, snapshot) {
-                  if (snapshot.data!.isNotEmpty) {
-                    programList = snapshot.data!;
+                  print("fatma");
+                  if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                    print("gatma");
                     return ListView.separated(
                         separatorBuilder: (context, index) => const Divider(color: Colors.white,),
                         itemCount: snapshot.data!.length,
                         itemBuilder: (context, i) {
-                          return FutureBuilder(
-                            future: getMemberExercise(snapshot.data![i].exercise_id),
-                            builder: (context, mExercise) {
-                              return Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: ListTile(
-                                  leading: SizedBox(
-                                    width: 50,
-                                    height: 100,
-                                    child: Icon(Icons.fitness_center_outlined, color: Colors.greenAccent.shade400,),
-                                  ),
-                                  trailing: const Icon(Icons.arrow_circle_right_outlined, color: Colors.white, size: 20.0,),
-                                  title: Text(mExercise.data!.name),
-                                  subtitle: Text(
-                                    "${snapshot.data![i].set.toString()} x ${snapshot.data![i].rep.toString()}",
-                                    style: TextStyle(
-                                      color: Colors.white.withOpacity(0.5),
+                          return
+                                   Padding(
+                                    padding: const EdgeInsets.all(5.0),
+                                    child: ListTile(
+                                      leading: SizedBox(
+                                        width: 50,
+                                        height: 100,
+                                        child: Icon(Icons.fitness_center_outlined, color: Colors.greenAccent.shade400,),
+                                      ),
+                                      trailing: const Icon(Icons.arrow_circle_right_outlined, color: Colors.white, size: 20.0,),
+                                      title: Text(snapshot.data![i].exercise.name),
+                                      subtitle: Text(
+                                        "${snapshot.data![i].set.toString()} x ${snapshot.data![i].rep.toString()}",
+                                        style: TextStyle(
+                                          color: Colors.white.withOpacity(0.5),
+                                        ),
+                                      ),
+                                      textColor: Colors.white,
+                                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(snapshot.data![i].exercise))),
                                     ),
-                                  ),
-                                  textColor: Colors.white,
-                                  onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(mExercise.data!))),
-                                ),
-                              );
-                            },
-                          );
+                                  );
+
+
                         }
                     );
-                  } else {
+                  } else if(snapshot.hasData && snapshot.data!.isEmpty) {
+                    print("gidi");
                     Navigator.push(context, MaterialPageRoute(builder: (context) => TrainerMemberProgramAddPage(widget.user)));
                   }
+                  else if(!snapshot.hasData)
+                    print("no data");
+
                   return const CircularProgressIndicator();
                 },
               ),

@@ -101,18 +101,28 @@ class UserEditDto {
   };
 }
 
-class UserResDto {
-  final int ID;
-  final int trainerID;
+class MemberResDto {
+  final int id;
+  final int user_id;
+  final int trainer_id;
+  final List<int>? programs;
 
-  const UserResDto({ required this.ID, required this.trainerID});
+  const MemberResDto({  required this.id,
+                        required this.user_id,
+                        required this.trainer_id,
+                        required this.programs});
 
-  factory UserResDto.fromJson(Map<String, dynamic> json) {
-    return UserResDto( ID: json['UserID'], trainerID: json['TrainerID'],);
+  factory MemberResDto.fromJson(Map<String, dynamic> json) {
+    return MemberResDto(  id: json['id'],
+                        user_id: json['user_id'],
+                        trainer_id: json['trainer_id'],
+                        programs: json['programs'],);
   }
 
   Map<String, dynamic> toJson() => {
-    'UserID': ID,
-    'TrainerID': trainerID
+    'id': id,
+    'user_id': user_id,
+    'trainer_id': trainer_id,
+    'programs': programs,
   };
 }

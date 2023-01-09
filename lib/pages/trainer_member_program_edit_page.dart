@@ -97,7 +97,7 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
                               ),
                             ),
                             textColor: Colors.white,
-                            onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(mExercise.data!))),
+                            //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(mExercise.data!))),
                           ),
                         );
                       },
