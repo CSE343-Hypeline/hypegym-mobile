@@ -407,7 +407,7 @@ class ApiService {
       print(response.body.toString());
       var result = json.decode(response.body)['programs'];
       print(result);
-      List<ProgramListDto> exerlist = result.map((e) => ProgramListDto.fromJson(e)).toList();
+      List<ProgramListDto> exerlist = List<ProgramListDto>.from(result.map((e) => ProgramListDto.fromJson(e)).toList());
 
       print(exerlist);
       return exerlist;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart';
+import 'package:hypegym/pages/trainer_member_program_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/exercise.dart';
 import 'package:hypegym/models/program.dart';
@@ -30,12 +31,28 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
         ),
         child: Column(
           children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 60.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 10,),
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 35.0,
+                    ),
+                    onPressed: () {
+                      WidgetsBinding.instance.addPostFrameCallback((_) {
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => TrainerMemberProgramPage(widget.user)));
+                      });
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 50.0, right: 10.0),
+                  child: Text(
                     "ADD PROGRAM",
                     style: TextStyle(
                       fontSize: 30,
@@ -43,8 +60,8 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                       color: Colors.greenAccent.shade400,
                     ),
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
             Expanded(
               child: FutureBuilder<List<ExerciseResDto>>(

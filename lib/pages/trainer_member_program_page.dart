@@ -20,17 +20,8 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
   final ApiService apiService = ApiService();
   late final Exercise exer;
 
-  Future<List<ProgramListDto>> getMemberExercise(int exer_id) async {
-    var exer = (await apiService.getPrograms(exer_id));
-    return exer;
-  }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    print(getMemberExercise(widget.user.ID));
-  }
-  late final List<ProgramDto> programList;
+  late final List<ProgramListDto> programList;
   //final List programList = ['Warn Up', 'Jumping Jack', 'Skipping', 'Squats', 'Arm Raises', 'Incline Push-Ups', 'Push-Ups'];
   @override
   Widget build(BuildContext context) {
@@ -61,9 +52,9 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
               child: FutureBuilder<List<ProgramListDto>>(
                 future: apiService.getPrograms(widget.user.ID),
                 builder: (context, snapshot) {
-                  print("fatma");
+
                   if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                    print("gatma");
+                    programList = snapshot.data!;
                     return ListView.separated(
                         separatorBuilder: (context, index) => const Divider(color: Colors.white,),
                         itemCount: snapshot.data!.length,

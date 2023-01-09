@@ -9,7 +9,7 @@ import 'package:hypegym/models/exercise.dart';
 
 class TrainerMemberProgramEditPage extends StatefulWidget {
   const TrainerMemberProgramEditPage(this.programList, this.user, {super.key});
-  final List<ProgramDto> programList;  //programDTO
+  final List<ProgramListDto> programList;  //programDTO
   final UserDto user;
 
   @override
@@ -60,9 +60,6 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
                   separatorBuilder: (context, index) => const Divider(color: Colors.white,),
                   itemCount: widget.programList.length,
                   itemBuilder: (context, i) {
-                    return FutureBuilder(
-                      future: getMemberExercise(widget.programList[i].exercise_id),
-                      builder: (context, mExercise) {
                         return Padding(
                           padding: const EdgeInsets.all(5.0),
                           child: ListTile(
@@ -89,7 +86,7 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
                                   }
                                 }
                             ),
-                            title: Text(mExercise.data!.name),
+                            title: Text(widget.programList[i].exercise.name),
                             subtitle: Text(
                               "${widget.programList[i].set.toString()} x ${widget.programList[i].rep.toString()}",
                               style: TextStyle(
@@ -100,8 +97,7 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
                             //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(mExercise.data!))),
                           ),
                         );
-                      },
-                    );
+
                   }
               ),
             ),

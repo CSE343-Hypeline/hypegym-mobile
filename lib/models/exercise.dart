@@ -13,7 +13,7 @@ class Exercise {
           name: json['name'],
           level: json['level'],
           equipment: json['equipment'],
-          instructions: json['instructions']);
+          instructions: List<String>.from(json['instructions']));
   }
 
   Map<String, dynamic> toJson() => {
