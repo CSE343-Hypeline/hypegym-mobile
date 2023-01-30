@@ -13,9 +13,7 @@ class AdminListMemberPage extends StatefulWidget {
 }
 
 class _AdminListMemberPageState extends State<AdminListMemberPage> {
-
   final ApiService apiService = ApiService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +48,6 @@ class _AdminListMemberPageState extends State<AdminListMemberPage> {
                       shrinkWrap: true,
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-
                         return ListTile(
                           focusColor: Colors.grey,
                           leading: const Icon(Icons.account_circle, color: Colors.white,),
@@ -83,7 +80,6 @@ class _AdminListMemberPageState extends State<AdminListMemberPage> {
                                   return print('pressedCancel');
                                 },
                               ),
-
                             ],
                           ),
                           subtitle: Text(

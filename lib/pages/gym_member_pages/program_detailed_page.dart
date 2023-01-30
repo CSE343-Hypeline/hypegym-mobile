@@ -105,7 +105,7 @@ class _ProgramDetailedPageState extends State<ProgramDetailedPage> {
                   ),
                   const SizedBox(height: 4),
                   Text(
-                    widget.exer.instructions.toString(),   //burdan hiccc emin deilim
+                    widget.exer.instructions.toString(),
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

@@ -15,6 +15,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+
   final ApiService apiService = ApiService();
   final storage = const FlutterSecureStorage();
   late final UserDto user;

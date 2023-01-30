@@ -102,7 +102,6 @@ class _TrainerMemberPageState extends State<TrainerMemberPage> {
                           return const CircularProgressIndicator();
                         },
                       ),
-
             ),
           ],
         ),

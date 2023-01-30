@@ -38,7 +38,6 @@ class _TrainerMemberMeasurementPageState extends State<TrainerMemberMeasurementP
                 ),
               ),
               DataTable(
-                //headingRowColor: MaterialStateProperty.all(Colors.greenAccent.shade400),
                 columns: [
                   DataColumn(label: Text('Field', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),
                   DataColumn(label: Text('Data', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),

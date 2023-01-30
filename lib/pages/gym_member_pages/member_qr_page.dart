@@ -163,7 +163,6 @@ class _MemberQrPageState extends State<MemberQrPage> {
     });
   }
 
-
   void _onPermissionSet(BuildContext context, QRViewController ctrl, bool p) {
     log('${DateTime.now().toIso8601String()}_onPermissionSet $p');
     if (!p) {
@@ -234,7 +233,6 @@ class _MemberQrPageState extends State<MemberQrPage> {
       }
     }
   }
-
 }
 
 showAlertDialog(BuildContext context, bool flag) {

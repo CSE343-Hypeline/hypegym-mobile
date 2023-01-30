@@ -19,10 +19,8 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
 
   final ApiService apiService = ApiService();
   late final Exercise exer;
-
-
   late final List<ProgramListDto> programList;
-  //final List programList = ['Warn Up', 'Jumping Jack', 'Skipping', 'Squats', 'Arm Raises', 'Incline Push-Ups', 'Push-Ups'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,8 +78,6 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
                                       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(snapshot.data![i].exercise))),
                                     ),
                                   );
-
-
                         }
                     );
                   } else if(snapshot.hasData && snapshot.data!.isEmpty) {
@@ -90,7 +86,6 @@ class _TrainerMemberProgramPageState extends State<TrainerMemberProgramPage> {
                   }
                   else if(!snapshot.hasData)
                     print("no data");
-
                   return const CircularProgressIndicator();
                 },
               ),

@@ -12,7 +12,6 @@ class UserAddPage extends StatefulWidget {
 }
 
 class _UserAddPageState extends State<UserAddPage> {
-
   final GlobalKey<FormState> _formKey = GlobalKey();
   final ApiService apiService = ApiService();
   final _nameController = TextEditingController();
@@ -22,7 +21,6 @@ class _UserAddPageState extends State<UserAddPage> {
   final _addressController = TextEditingController();
   String gender = 'MALE';
   String dropdownValue = '1 Month';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -38,7 +38,6 @@ class _MeasurementEditPageState extends State<MeasurementEditPage> {
                 ),
               ),
               DataTable(
-                //headingRowColor: MaterialStateProperty.all(Colors.greenAccent.shade400),
                 columns: [
                   DataColumn(label: Text('Field', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),
                   DataColumn(label: Text('Data', style: TextStyle(color: Colors.greenAccent.shade400, fontWeight: FontWeight.bold),)),
@@ -54,7 +53,6 @@ class _MeasurementEditPageState extends State<MeasurementEditPage> {
                       child: TextFormField(
                         controller: TextEditingController(text: e.value.toString()),
                         style: const TextStyle(color: Colors.white),
-                        //initialValue: e.value.toString(),
                         keyboardType: TextInputType.text,
                         onFieldSubmitted: (val){
                           widget.memberMeasurement[e.key] = val;

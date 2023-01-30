@@ -1,12 +1,10 @@
 import 'dart:convert';
-
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart';
 import 'package:hypegym/helpers/constants.dart';
 import 'package:hypegym/models/exercise.dart';
 import 'package:hypegym/models/program.dart';
 import 'package:hypegym/models/user.dart';
-
 
 class ApiService {
 
@@ -374,7 +372,6 @@ class ApiService {
         'Cookie': 'Authorization=$token'
       };
       print(token.toString());
-
       print(token.toString());
       Response response = await post(
           Uri.parse('${Constants.baseUrl}/api/member/assign-programs/$member_id'),
@@ -403,12 +400,10 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-
       print(response.body.toString());
       var result = json.decode(response.body)['programs'];
       print(result);
       List<ProgramListDto> exerlist = List<ProgramListDto>.from(result.map((e) => ProgramListDto.fromJson(e)).toList());
-
       print(exerlist);
       return exerlist;
     } else {
@@ -431,7 +426,6 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-
       print(response.body.toString());
       final List result = json.decode(response.body)['programs'];
       return result.map((e) => ProgramDto.fromJson(e)).toList();

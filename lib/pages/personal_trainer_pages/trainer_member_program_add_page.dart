@@ -17,9 +17,7 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
 
   List<String>? tSet = List.filled(10,"");
   List<String>? tRep = List.filled(10,"");
-
   final ApiService apiService = ApiService();
-  //late final Program mProgram;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,6 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
         ),
         child: Column(
           children: [
-
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -80,7 +77,7 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                 child: Icon(Icons.fitness_center_outlined, color: Colors.greenAccent.shade400,),
                               ),
                               trailing: Wrap(
-                                spacing: 12, // space between two icons
+                                spacing: 12,
                                 children: <Widget>[
                                   SizedBox(
                                     height: 40,
@@ -103,8 +100,6 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                           borderSide: const BorderSide(color: Colors.white),
                                           borderRadius: BorderRadius.circular(5.0),
                                         ),
-                                        //hintText: 'Set',
-                                        //hintStyle: TextStyle(color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -114,7 +109,6 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                         height: 40,
                                         width: 20,
                                         child: Text('x', style: TextStyle(color: Colors.white,fontSize: 25.0,),)
-                                      //child: Icon(Icons.cancel_outlined, color: Colors.white,),
                                     ),
                                   ),
                                   SizedBox(
@@ -138,8 +132,6 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
                                           borderSide: const BorderSide(color: Colors.white),
                                           borderRadius: BorderRadius.circular(5.0),
                                         ),
-                                        //hintText: 'Rep',
-                                        //hintStyle: TextStyle(color: Colors.white),
                                       ),
                                     ),
                                   ),
@@ -170,7 +162,6 @@ class _TrainerMemberProgramAddPageState extends State<TrainerMemberProgramAddPag
 
                               title: Text(snapshot.data![i].name),
                               textColor: Colors.white,
-                              //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(snapshot.data!.))),
                             ),
                           );
                         }

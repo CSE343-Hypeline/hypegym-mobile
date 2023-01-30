@@ -1,11 +1,6 @@
 import 'dart:convert';
-//import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:hypegym/helpers/constants.dart';
-//import 'package:http/http.dart' as http;
-//import 'dart:io';
-//import 'package:hypegym/pages/admin_gym_page.dart';
-
 
 class AuthService {
   var loginUri = Uri.parse('${Constants.baseUrl}/login');

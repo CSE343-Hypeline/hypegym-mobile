@@ -20,13 +20,6 @@ class _MemberProgramPageState extends State<MemberProgramPage> {
   UserDto? profile;
   late final Exercise exer;
 
-/*
-  Future<UserDto> temp() async {
-    var res = await apiService.getMe() ;
-    profile = UserDto.fromJson(jsonDecode(res!.body));
-    return profile;
-  }
-*/
   Future<Exercise> getMemberExercise(int exer_id) async {
     exer = await apiService.getExercise(exer_id);
     return exer;
@@ -42,7 +35,6 @@ class _MemberProgramPageState extends State<MemberProgramPage> {
     profile = (await apiService.userOrEmpty)!;
     setState((){});
   }
-
 
   @override
   Widget build(BuildContext context) {

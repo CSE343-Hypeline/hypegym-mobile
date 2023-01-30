@@ -13,7 +13,6 @@ class AdminTrainerPage extends StatefulWidget {
 
 class _AdminTrainerPageState extends State<AdminTrainerPage>{
   final ApiService apiService = ApiService();
-
   @override
   Widget build(BuildContext context) {
   return Scaffold(

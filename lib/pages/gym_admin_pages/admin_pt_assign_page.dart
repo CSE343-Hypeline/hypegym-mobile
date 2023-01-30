@@ -12,9 +12,7 @@ class AdminPTAssignPage extends StatefulWidget {
 }
 
 class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
-
   final ApiService apiService = ApiService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

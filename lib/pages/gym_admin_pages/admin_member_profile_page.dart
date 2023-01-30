@@ -13,9 +13,7 @@ class AdminMemberProfilePage extends StatefulWidget {
 }
 
 class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
-
   final ApiService apiService = ApiService();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

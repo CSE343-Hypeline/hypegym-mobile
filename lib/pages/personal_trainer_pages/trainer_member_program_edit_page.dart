@@ -28,6 +28,7 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
     exer = await apiService.getExercise(exer_id);
     return exer;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,10 +93,8 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
                               ),
                             ),
                             textColor: Colors.white,
-                            //onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => ProgramDetailedPage(mExercise.data!))),
                           ),
                         );
-
                   }
               ),
             ),
@@ -105,7 +104,6 @@ class _TrainerMemberProgramEditPageState extends State<TrainerMemberProgramEditP
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(context, MaterialPageRoute(builder: (context) => TrainerMemberProgramAddPage(widget.user)));
-          //Navigator.push( context, MaterialPageRoute( builder: (context) => TrainerMemberProgramAddPage().then((value) => setState(() {}));
         },
         backgroundColor: Colors.greenAccent.shade400,
         foregroundColor: Colors.black,

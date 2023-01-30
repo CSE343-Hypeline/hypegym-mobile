@@ -1,31 +1,3 @@
-//import 'dart:convert';
-/*
-class User {
-  final String email;
-  final String role;
-  final int ID;
-  final int gymId;
-  final int exp;
-
-  const User({required this.email, required this.role,required this.ID, required this.gymId, required this.exp});
-
-  factory User.fromJson(Map<String, dynamic> json) {
-    return User(
-        email: json['email'], role: json['role'], ID: json['id'], gymId: json['gym_id'], exp: json['exp']);
-  }
-
-  Map<String, dynamic> toJson() => {
-    "ID": 1,
-    "name": "super",
-    "email": "superadmin@superadmin",
-    "phone_number": "11111111111",
-    "gender": "OTHER",
-    "address": "Gebze No: 1",
-    "gym_id": 1,
-    "role": "SUPERADMIN"
-  };
-}*/
-
 class UserDto {
   final int ID;
   final String name;
