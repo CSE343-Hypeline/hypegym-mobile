@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/admin_gym_information_page.dart';
-import 'package:hypegym/pages/admin_member_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_gym_information_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_member_page.dart';
 import 'package:hypegym/pages/profile_page.dart';
-import 'package:hypegym/pages/admin_trainer_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_trainer_page.dart';
 //import 'package:hypegym_yedek_1/pages/member_list.dart';
 
 class AdminGymPage extends StatefulWidget {

@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:hypegym/models/user.dart';
-import 'package:hypegym/pages/admin_gym_page.dart';
-import 'package:hypegym/pages/trainer_gym_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_gym_page.dart';
+import 'package:hypegym/pages/personal_trainer_pages/trainer_gym_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/services/auth_service.dart';
 
-import 'member_gym_page.dart';
+import 'gym_member_pages/member_gym_page.dart';
 
 
 class LoginPage extends StatefulWidget {

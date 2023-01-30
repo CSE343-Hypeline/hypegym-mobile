@@ -1,7 +1,7 @@
 //import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/program_detailed_page.dart';
+import 'package:hypegym/pages/gym_member_pages/program_detailed_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/user.dart';
 import 'package:hypegym/models/program.dart';

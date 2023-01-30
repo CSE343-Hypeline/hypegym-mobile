@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/trainer_member_measurement_edit_page.dart';
+import 'package:hypegym/pages/personal_trainer_pages/trainer_member_measurement_edit_page.dart';
 
 class TrainerMemberMeasurementPage extends StatefulWidget {
   const TrainerMemberMeasurementPage(this.measurementMap, {super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/member_measurement_page.dart';
-import 'package:hypegym/pages/member_program_page.dart';
-import 'package:hypegym/pages/member_qr_page.dart';
+import 'package:hypegym/pages/gym_member_pages/member_measurement_page.dart';
+import 'package:hypegym/pages/gym_member_pages/member_program_page.dart';
+import 'package:hypegym/pages/gym_member_pages/member_qr_page.dart';
 import 'package:hypegym/pages/profile_page.dart';
 
 class MemberGymPage extends StatefulWidget {

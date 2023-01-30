@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/admin_gym_page.dart';
-import 'package:hypegym/pages/member_gym_page.dart';
-import 'package:hypegym/pages/trainer_gym_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_gym_page.dart';
+import 'package:hypegym/pages/gym_member_pages/member_gym_page.dart';
+import 'package:hypegym/pages/personal_trainer_pages/trainer_gym_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/user.dart';
 

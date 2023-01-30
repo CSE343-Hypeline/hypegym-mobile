@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/admin_gym_page.dart';
-import 'package:hypegym/pages/admin_member_page.dart';
-import 'package:hypegym/pages/admin_member_profile_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_member_profile_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/user.dart';
 import 'package:confirm_dialog/confirm_dialog.dart';

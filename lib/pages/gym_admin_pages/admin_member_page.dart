@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/models/user.dart';
-import 'package:hypegym/pages/admin_member_profile_page.dart';
-import 'package:hypegym/pages/user_add_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_member_profile_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/user_add_page.dart';
 import 'package:hypegym/services/api_service.dart';
 
 class AdminMemberPage extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hypegym/pages/profile_page.dart';
-import 'package:hypegym/pages/trainer_member_page.dart';
+import 'package:hypegym/pages/personal_trainer_pages/trainer_member_page.dart';
 
 class TrainerGymPage extends StatefulWidget {
   const TrainerGymPage({Key? key}) : super(key: key);

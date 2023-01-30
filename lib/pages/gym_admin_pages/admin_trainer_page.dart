@@ -1,26 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/admin_gym_page.dart';
-import 'package:hypegym/pages/admin_member_page.dart';
-import 'package:hypegym/pages/admin_member_profile_page.dart';
-import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/user.dart';
-import 'package:confirm_dialog/confirm_dialog.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_trainer_profile_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/user_add_page.dart';
+import 'package:hypegym/services/api_service.dart';
 
-class AdminPTAssignPage extends StatefulWidget {
-  const AdminPTAssignPage(this.user, {super.key});
-  final UserDto user;
+class AdminTrainerPage extends StatefulWidget {
+  const AdminTrainerPage({Key? key}) : super(key: key);
 
   @override
-  State<AdminPTAssignPage> createState() => _AdminPTAssignPageState();
+  State<AdminTrainerPage> createState() => _AdminTrainerPageState();
 }
 
-class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
-
+class _AdminTrainerPageState extends State<AdminTrainerPage>{
   final ApiService apiService = ApiService();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+  return Scaffold(
       body: Container(
         decoration: BoxDecoration(
           color: Colors.grey.shade900,
@@ -33,9 +29,9 @@ class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Assign Trainer",
+                    "TRAINERS",
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 30,
                       fontWeight: FontWeight.bold,
                       color: Colors.greenAccent.shade400,
                     ),
@@ -45,7 +41,7 @@ class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
             ),
             Expanded(
               child: FutureBuilder<List<UserDto>>(
-                future: apiService.getTrainers(widget.user.gymId), //gym id yollamamiz lazim
+                future: apiService.fetchTrainers(), //gym id yollamamiz lazim
                 builder: (context, snapshot) {
                   if (snapshot.hasData) {
                     return ListView.builder(
@@ -53,9 +49,8 @@ class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          focusColor: Colors.grey,
                           leading: const Icon(Icons.account_circle, color: Colors.white,),
-                          title: Text(snapshot.data![index].email.toString()),
+                          title: Text(snapshot.data![index].name.toString()),
                           trailing: Wrap(
                             spacing: 12,
                             children: <Widget>[
@@ -70,28 +65,7 @@ class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
                             ),
                           ),
                           textColor: Colors.white,
-                          onTap: ()async {
-                          if (await confirm(  context,
-                                              title: const Text('Confirm'),
-                                              content: const Text('Would you like to assign?'),
-                                              textOK: const Text('Yes'),
-                                              textCancel: const Text('No'),
-                                              ))
-                          {
-                            var res = await apiService.assignPT(widget.user.ID,snapshot.data![index].ID);
-                            switch (res!.statusCode) {
-                              case 200:
-                                print('assigned to member');
-                                Navigator.pop(context);
-                                break;
-                              default:
-                                print('member not assign');
-                                break;
-                            }
-                            return;
-                          }
-                            return print('pressedCancel');
-                          },
+                          onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => AdminTrainerProfilePage(snapshot.data![index]))),
                         );
                       },
                     );
@@ -105,8 +79,14 @@ class _AdminPTAssignPageState extends State<AdminPTAssignPage> {
           ],
         ),
       ),
-
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const UserAddPage(2)));
+        },
+        backgroundColor: Colors.greenAccent.shade400,
+        foregroundColor: Colors.black,
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
-

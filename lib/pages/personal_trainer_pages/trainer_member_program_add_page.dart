@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:http/http.dart';
-import 'package:hypegym/pages/trainer_member_program_page.dart';
+import 'package:hypegym/pages/personal_trainer_pages/trainer_member_program_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/exercise.dart';
 import 'package:hypegym/models/program.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/admin_gym_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_gym_page.dart';
 import 'package:hypegym/services/api_service.dart';
 
 class UserAddPage extends StatefulWidget {

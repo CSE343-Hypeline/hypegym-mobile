@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:hypegym/pages/admin_gym_page.dart';
-import 'package:hypegym/pages/admin_pt_assign_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_gym_page.dart';
+import 'package:hypegym/pages/gym_admin_pages/admin_list_member_page.dart';
 import 'package:hypegym/services/api_service.dart';
 import 'package:hypegym/models/user.dart';
 
-class AdminMemberProfilePage extends StatefulWidget {
-  const AdminMemberProfilePage(this.user, {super.key});
+class AdminTrainerProfilePage extends StatefulWidget {
+  const AdminTrainerProfilePage(this.user, {super.key});
   final UserDto user;
 
   @override
-  State<AdminMemberProfilePage> createState() => _AdminMemberProfilePageState();
+  State<AdminTrainerProfilePage> createState() => _AdminTrainerProfilePageState();
 }
 
-class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
+class _AdminTrainerProfilePageState extends State<AdminTrainerProfilePage> {
 
   final ApiService apiService = ApiService();
 
@@ -35,9 +35,9 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "MEMBER PROFILE",
+                      "TRAINER PROFILE",
                       style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 40,
                         fontWeight: FontWeight.bold,
                         color: Colors.greenAccent.shade400,
                       ),
@@ -45,6 +45,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                   ],
                 ),
               ),
+              const SizedBox(height: 24),
               Column(
                 children: [
                   Text(
@@ -121,18 +122,18 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => AdminPTAssignPage(widget.user)));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => AdminListMemberPage(widget.user)));
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.greenAccent.shade700,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(25)
                       ),
-                      minimumSize: const Size(230, 30),
-                      maximumSize: const Size(230, 30),
+                      minimumSize: const Size(250, 30),
+                      maximumSize: const Size(250, 30),
                     ),
                     child: const Text(
-                      "Change/Add Trainer",
+                      "List his/her trainees",
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,
@@ -178,7 +179,7 @@ class _AdminMemberProfilePageState extends State<AdminMemberProfilePage> {
                           ScaffoldMessenger.of(context).showSnackBar(snackBar);
                         },
                         child: const Text(
-                          'Remove this member',
+                          'Remove this trainer',
                           style: TextStyle(
                             color: Colors.white,
                             decoration: TextDecoration.underline,
